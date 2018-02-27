@@ -1,6 +1,9 @@
 #pragma once
 #include "RenderSystem.h"
 #include "UpdateSystem.h"
+#include "EventSystem.h"
+#include "GameLogic.h"
+#include <memory>
 
 class Context final
 {
@@ -8,26 +11,50 @@ public:
 	static Context& Instance()
 	{
 		static Context _instance;
+
+        if (!_instance.mInitialized)
+            _instance.Setup();
+
 		return _instance;
 	}
 
-	RenderSystem& GetRender()
+	RenderSystem* GetRender()
 	{
-		return _render;
+		return mRender.get();
 	}
 
-	UpdateSystem& GetUpdate()
+	UpdateSystem* GetUpdate()
 	{
-		return _update;
+		return mUpdate.get();
 	}
+
+    EventSystem* GetEvents()
+    {
+        return mEvents.get();
+    }
+
+    GameLogic* GetLogic()
+    {
+        return mLogic.get();
+    }
 
 private:
-	Context()
-		: _render()
-		, _update()
+    Context()
 	{
 	}
 
-	RenderSystem _render;
-	UpdateSystem _update;
+    void Setup()
+    {
+        mInitialized = true;
+        mEvents = std::make_unique<EventSystem>();
+        mUpdate = std::make_unique<UpdateSystem>();
+        mLogic = std::make_unique<GameLogic>();
+        mRender = std::make_unique<RenderSystem>();
+    }
+
+    std::unique_ptr<EventSystem> mEvents;
+    std::unique_ptr<UpdateSystem> mUpdate;
+    std::unique_ptr<GameLogic> mLogic;
+    std::unique_ptr<RenderSystem> mRender;
+    bool mInitialized = false;
 };

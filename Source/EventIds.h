@@ -3,9 +3,11 @@
 enum class EventId : int
 {
 	Invalid = -1,
-	Broadcast,
+    System,
 	Render,
 	Update,
+
+    Close,
 
 	MaxEvent
 };
