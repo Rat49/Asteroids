@@ -312,6 +312,7 @@
   <ItemGroup>
     <ClCompile Include="EventSystem.cpp" />
     <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderMethod.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
@@ -323,6 +324,8 @@
     <ClInclude Include="EventIds.h" />
     <ClInclude Include="EventSystem.h" />
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="InputGameAction.h" />
+    <ClInclude Include="InputSystem.h" />
     <ClInclude Include="RenderMethod.h" />
     <ClInclude Include="UpdateMethod.h" />
     <ClInclude Include="UpdateSystem.h" />

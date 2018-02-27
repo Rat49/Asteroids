@@ -12,7 +12,11 @@ namespace
 
 RenderSystem::RenderSystem()
 {
-	s_renderWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode::getDesktopMode(), Title, sf::Style::Fullscreen);
+#ifdef _DEBUG
+    s_renderWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode(1280, 720), Title, sf::Style::Default);
+#else
+    s_renderWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode::getDesktopMode(), Title, sf::Style::Fullscreen);
+#endif
     Context::Instance().GetLogic()->SetWindow(s_renderWindow.get());
 }
 
