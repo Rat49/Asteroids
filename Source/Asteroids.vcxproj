@@ -310,22 +310,26 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Colliders.cpp" />
     <ClCompile Include="EventSystem.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="RenderMethod.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="UpdateMethod.cpp" />
     <ClCompile Include="UpdateSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Colliders.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="EventIds.h" />
     <ClInclude Include="EventSystem.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="InputGameAction.h" />
     <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="RenderMethod.h" />
     <ClInclude Include="UpdateMethod.h" />
     <ClInclude Include="UpdateSystem.h" />
