@@ -18,7 +18,7 @@ RenderSystem::~RenderSystem()
 	s_renderWindow.close();
 }
 
-void RenderSystem::Update(float deltaTime)
+void RenderSystem::Update(float)
 {
 	s_renderWindow.clear();
 	RaiseEvent(EventId::Render, &s_renderWindow);

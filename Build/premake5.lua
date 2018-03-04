@@ -1,13 +1,13 @@
 workspace "Game"
 	configurations { "Debug", "Release" }
-	platforms { "Win32", "Win64" }
-	location ("Generated/Build")
-	targetdir ("Generated/Bin/%{prj.name}_%{cfg.longname}")
-	objdir ("Generated/Obj/%{prj.name}_%{cfg.longname}")
+	platforms { "Win32", "x64" }
+	location ("Generated/Proj")
+	targetdir ("Generated/Bin/%{prj.name}_%{cfg.platform}")
+	objdir ("Generated/Obj/%{prj.name}")
 	
 	flags "FatalWarnings"
-		warnings "Extra"	
-	
+		warnings "Extra"
+        
 	filter "configurations:Debug"
 		defines { "_DEBUG" }
 		symbols "On"
@@ -24,7 +24,7 @@ workspace "Game"
 		system "Windows"
 		defines { "WIN32" }
 
-	filter "platforms:Win64"
+	filter "platforms:x64"
 		architecture "x64"
 		system "Windows"
 	

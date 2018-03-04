@@ -1,31 +1,16 @@
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-workspace "Game"
-	configurations { "Debug", "Release" }
------------------------------------------------------------------------------------------------------------------------------------------------------
 project "Asteroids"
 	kind "WindowedApp"
 	language "C++"
-	characterset "MBCS"
-   
-	filter { "platforms:Win32" }
-		system "Windows"
-		architecture "x86"
-		defines { "WIN32" }
-
-	filter { "platforms:Win64" }
-		system "Windows"
-		architecture "x64"
-		
-	local libPostfix = "";
-	filter { "configurations:Debug" }
-		libPostfix = "-d"
-		
-	local SourceDir = "Asteroids/Source/";
+	characterset "MBCS"    
+    defines { "SFML_STATIC" }
+	
+	local SourceDir = "../Source/";
 
 	files
 	{
 		SourceDir .. "**.h",
-		SourceDir .. "**.cpp"
+		SourceDir .. "**.cpp",
 	}
    
 	vpaths
@@ -33,16 +18,23 @@ project "Asteroids"
 	   ["Header Files/*"] = { SourceDir .. "**.h" },
 	   ["Source Files/*"] = { SourceDir .. "**.cpp" },
 	}
-	
+    
+    postbuildcommands
+    {
+        "{COPY} %{wks.location}/../../../SFML/%{cfg.platform}/bin/openal32.dll %{cfg.targetdir}"
+    }
+    
 	includedirs
 	{
-		SourceDir .. "/../SFML/%{cfg.longname}/include"
+		SourceDir .. "/../SFML/%{cfg.platform}/include"
 	}
 	
 	libdirs
 	{
+		SourceDir .. "/../SFML/%{cfg.platform}/lib"
 	}
 	
+    
 	links
 	{
 		"opengl32.lib",
@@ -52,10 +44,25 @@ project "Asteroids"
 		"winmm.lib",
 		"openal32.lib",
 		"gdi32.lib",
-		"sfml-window-s" .. libPostfix .. ".lib",
-		"sfml-system-s" .. libPostfix .. ".lib",
-		"sfml-graphics-s" .. libPostfix .. ".lib",
-		"sfml-audio-s" .. libPostfix .. ".lib",
-		"sfml-network-s" .. libPostfix .. ".lib"
-	}
+    }
+    
+    filter { "configurations:Debug" }
+        links
+        {
+            "sfml-window-s-d.lib",
+            "sfml-system-s-d.lib",
+            "sfml-graphics-s-d.lib",
+            "sfml-audio-s-d.lib",
+            "sfml-network-s-d.lib"
+        }
+        
+    filter { "configurations:Release" }
+        links
+        {
+            "sfml-window-s.lib",
+            "sfml-system-s.lib",
+            "sfml-graphics-s.lib",
+            "sfml-audio-s.lib",
+            "sfml-network-s.lib"
+        }
 -----------------------------------------------------------------------------------------------------------------------------------------------------

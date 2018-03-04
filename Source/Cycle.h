@@ -12,8 +12,8 @@ public:
 	void AddDrawable(sf::Drawable* obj);
 	void RemoveDrawable(sf::Drawable* obj);
 
-	void AddUpdateable(Updateable* obj);
-	void RemoveUpdateable(Updateable* obj);
+	//void AddUpdateable(Updateable* obj);
+	//void RemoveUpdateable(Updateable* obj);
 
 	void Run();
 

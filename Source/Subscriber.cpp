@@ -11,7 +11,7 @@ UpdateMethod::~UpdateMethod()
 	Context::Instance().GetUpdate().RemoveSubscriber(EventId::Update, this);
 }
 
-void UpdateMethod::OnNotification(EventId id, void* data)
+void UpdateMethod::OnNotification(EventId, void* data)
 {
 	Update(*reinterpret_cast<float*>(data));
 }
@@ -26,7 +26,7 @@ RenderMethod::~RenderMethod()
 	Context::Instance().GetRender().RemoveSubscriber(EventId::Render, this);
 }
 
-void RenderMethod::OnNotification(EventId id, void* data)
+void RenderMethod::OnNotification(EventId, void* data)
 {
 	Render(reinterpret_cast<sf::RenderTarget*>(data));
 }
