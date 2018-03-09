@@ -27,6 +27,7 @@ public:
 
 protected:
     ColliderType mType;
+	sf::Vector2f mOrigin;
 };
 
 class LineCollider : public Collider
@@ -39,7 +40,6 @@ public:
 
 private:
     const sf::LineShape* mOwner;
-    sf::Vector2f mOrigin;
     sf::Vector2f mDirection;
 };
 
@@ -53,6 +53,7 @@ public:
 
 private:
     const sf::RectangleShape* mOwner;
+	sf::Vector2f mOpposite;
 };
 
 class CircleCollider : public Collider
@@ -65,4 +66,5 @@ public:
 
 private:
     const sf::CircleShape* mOwner;
+	float mRadius;
 };

@@ -1,4 +1,5 @@
 #include "Colliders.h"
+#include "VectorMath.h"
 #include <SFML/Graphics.hpp>
 
 namespace
@@ -87,7 +88,7 @@ LineCollider::LineCollider(const sf::LineShape* owner) : mOwner(owner)
 
 bool LineCollider::Contains(sf::Vector2f point) const
 {
-    return false;
+	return ((point.x - mOrigin.x) / mDirection.x) == ((point.y - mOrigin.y) / mDirection.y);
 }
 
 bool LineCollider::Intersects(const Collider* other) const
@@ -105,7 +106,11 @@ RectangleCollider::RectangleCollider(const sf::RectangleShape* owner) : mOwner(o
 
 bool RectangleCollider::Contains(sf::Vector2f point) const
 {
-    return false;
+	if (std::fmin(mOrigin.x, mOpposite.x) > point.x) return false;
+	if (std::fmin(mOrigin.y, mOpposite.y) > point.y) return false;
+	if (std::fmax(mOrigin.x, mOpposite.x) < point.x) return false;
+	if (std::fmax(mOrigin.y, mOpposite.y) < point.y) return false;
+	return true;
 }
 
 bool RectangleCollider::Intersects(const Collider* other) const
@@ -123,7 +128,7 @@ CircleCollider::CircleCollider(const sf::CircleShape* owner) : mOwner(owner)
 
 bool CircleCollider::Contains(sf::Vector2f point) const
 {
-    return false;
+	return VectorMath::SqrLength(mOrigin - point) <= (mRadius * mRadius);
 }
 
 bool CircleCollider::Intersects(const Collider* other) const
