@@ -336,6 +336,7 @@
     <ClInclude Include="Broadcaster.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="EventMethod.h" />
+    <ClInclude Include="VectorMath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

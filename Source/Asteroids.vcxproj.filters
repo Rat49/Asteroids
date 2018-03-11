@@ -89,5 +89,8 @@
     <ClInclude Include="Colliders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VectorMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
