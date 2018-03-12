@@ -1,21 +1,27 @@
 #include "Colliders.h"
 #include "VectorMath.h"
+#include <cassert>
 #include <SFML/Graphics.hpp>
 
 namespace
 {
     bool __Intersects(const LineCollider* a, const LineCollider* b)
     {
-        return false;
+		const auto dir1 = a->GetDirection();
+		const auto dir2 = a->GetDirection();
+		return (dir1.y / dir1.x) != (dir2.y / dir2.x);
     }
 
     bool __Intersects(const CircleCollider* a, const CircleCollider* b)
     {
-        return false;
+		const auto distance = VectorMath::SqrLength(a->GetOrigin() - b->GetOrigin());
+		const auto radiuses = std::powf(a->GetRadius() + b->GetRadius(), 2);
+		return distance <= radiuses;
     }
 
     bool __Intersects(const RectangleCollider* a, const RectangleCollider* b)
     {
+
         return false;
     }
 
@@ -31,50 +37,6 @@ namespace
 
     bool __Intersects(const RectangleCollider* a, const LineCollider* b)
     {
-        return false;
-    }
-
-    bool _Intersects(const Collider* a, const Collider* b)
-    {
-        switch (a->GetType())
-        {
-        case ColliderType::Circle:
-            switch (b->GetType())
-            {
-            case ColliderType::Circle:
-                return __Intersects(static_cast<const CircleCollider*>(a), static_cast<const CircleCollider*>(b));
-            case ColliderType::Line:
-                return __Intersects(static_cast<const LineCollider*>(b), static_cast<const CircleCollider*>(a));
-            case ColliderType::Rectangle:
-                return __Intersects(static_cast<const CircleCollider*>(a), static_cast<const RectangleCollider*>(b));
-            default:
-                break;
-            }
-        case ColliderType::Line:
-            switch (b->GetType())
-            {
-            case ColliderType::Circle:
-                return __Intersects(static_cast<const LineCollider*>(a), static_cast<const CircleCollider*>(b));
-            case ColliderType::Line:
-                return __Intersects(static_cast<const LineCollider*>(a), static_cast<const LineCollider*>(b));
-            case ColliderType::Rectangle:
-                return __Intersects(static_cast<const RectangleCollider*>(b), static_cast<const LineCollider*>(a));
-            default:
-                break;
-            }
-        case ColliderType::Rectangle:
-            switch (b->GetType())
-            {
-            case ColliderType::Circle:
-                return __Intersects(static_cast<const CircleCollider*>(b), static_cast<const RectangleCollider*>(a));
-            case ColliderType::Line:
-                return __Intersects(static_cast<const RectangleCollider*>(a), static_cast<const LineCollider*>(b));
-            case ColliderType::Rectangle:
-                return __Intersects(static_cast<const RectangleCollider*>(a), static_cast<const RectangleCollider*>(b));
-            default:
-                break;
-            }
-        }
         return false;
     }
 }
@@ -93,7 +55,18 @@ bool LineCollider::Contains(sf::Vector2f point) const
 
 bool LineCollider::Intersects(const Collider* other) const
 {
-    return _Intersects(this, other);
+	assert(other != nullptr);
+	switch (other->GetType())
+	{
+	case ColliderType::Circle:
+		return __Intersects(this, static_cast<const CircleCollider*>(other));
+	case ColliderType::Line:
+		return __Intersects(this, static_cast<const LineCollider*>(other));
+	case ColliderType::Rectangle:
+		return __Intersects(static_cast<const RectangleCollider*>(other), this);
+	default:
+		return false;
+	}
 }
 
 #pragma endregion
@@ -115,7 +88,18 @@ bool RectangleCollider::Contains(sf::Vector2f point) const
 
 bool RectangleCollider::Intersects(const Collider* other) const
 {
-    return _Intersects(this, other);
+	assert(other != nullptr);
+	switch (other->GetType())
+	{
+	case ColliderType::Circle:
+		return __Intersects(static_cast<const CircleCollider*>(other), static_cast<const RectangleCollider*>(other));
+	case ColliderType::Line:
+		return __Intersects(this, static_cast<const LineCollider*>(other));
+	case ColliderType::Rectangle:
+		return __Intersects(this, static_cast<const RectangleCollider*>(other));
+	default:
+		return false;
+	}
 }
 
 #pragma endregion
@@ -133,7 +117,18 @@ bool CircleCollider::Contains(sf::Vector2f point) const
 
 bool CircleCollider::Intersects(const Collider* other) const
 {
-    return _Intersects(this, other);
+	assert(other != nullptr);
+	switch (other->GetType())
+	{
+	case ColliderType::Circle:
+		return __Intersects(this, static_cast<const CircleCollider*>(other));
+	case ColliderType::Line:
+		return __Intersects(static_cast<const LineCollider*>(other), this);
+	case ColliderType::Rectangle:
+		return __Intersects(this, static_cast<const RectangleCollider*>(other));
+	default:
+		return false;
+	}
 }
 
 #pragma endregion
