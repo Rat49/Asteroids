@@ -21,22 +21,61 @@ namespace
 
     bool __Intersects(const RectangleCollider* a, const RectangleCollider* b)
     {
+		const auto a1 = a->GetOrigin();
+		const auto a2 = a->GetOppositePoint();
+		const auto b1 = b->GetOrigin();
+		const auto b2 = b->GetOppositePoint();
 
-        return false;
+		const auto aMinX = std::min(a1.x, a2.x);
+		const auto bMinX = std::min(b1.x, b2.x);
+		const auto aMaxX = std::max(a1.x, a2.x);
+		const auto bMaxX = std::max(b1.x, b2.x);
+		if (aMinX > bMaxX || aMaxX < bMinX)
+		{
+			return false;
+		}
+
+		const auto aMinY = std::min(a1.y, a2.y);
+		const auto bMinY = std::min(b1.y, b2.y);
+		const auto aMaxY = std::max(a1.y, a2.y);
+		const auto bMaxY = std::max(b1.y, b2.y);
+		if (aMinY > bMaxY || aMaxY < bMinY)
+		{
+			return false;
+		}
+
+		//TODO: check case if one small rect is hidden in shadow of bigger rect
+        return true;
     }
 
     bool __Intersects(const LineCollider* a, const CircleCollider* b)
     {
-        return false;
+		const auto distance = a->GetOrigin() - b->GetOrigin();
+		const auto ap = VectorMath::Dot(a->GetDirection(), a->GetDirection());
+		const auto bp = VectorMath::Dot(distance, a->GetDirection());
+		const auto cp = VectorMath::Dot(distance, distance) - std::pow(b->GetRadius(), 2);
+
+		const auto disc = bp * bp - ap * cp;
+		return disc >= 0.0f;
     }
 
     bool __Intersects(const CircleCollider* a, const RectangleCollider* b)
     {
-        return false;
+		const auto b1 = b->GetOrigin();
+		const auto b3 = b->GetOppositePoint();
+		const auto b2 = sf::Vector2f(b1.x, b3.y);
+		const auto b4 = sf::Vector2f(b3.x, b1.y);
+		const auto a1 = a->GetOrigin();
+		const auto dist = std::pow(a->GetRadius(), 2);
+		return VectorMath::SqrLength(a1 - b1) <= dist
+			|| VectorMath::SqrLength(a1 - b2) <= dist
+			|| VectorMath::SqrLength(a1 - b3) <= dist
+			|| VectorMath::SqrLength(a1 - b4) <= dist;
     }
 
     bool __Intersects(const RectangleCollider* a, const LineCollider* b)
     {
+		//TBD
         return false;
     }
 }
