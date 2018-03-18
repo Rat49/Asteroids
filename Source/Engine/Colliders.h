@@ -1,4 +1,5 @@
 #pragma once
+#include <Exports.h>
 #include <SFML/System/Vector2.hpp>
 
 namespace sf
@@ -16,7 +17,7 @@ enum class ColliderType
     Rectangle
 };
 
-class Collider
+class ENGINE_EXPORT Collider
 {
 public:
     Collider() : mType(ColliderType::Invalid) {}

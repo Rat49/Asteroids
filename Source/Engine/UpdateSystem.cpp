@@ -1,5 +1,6 @@
-#include "UpdateSystem.h"
-#include "Context.h"
+#include <UpdateSystem.h>
+#include <EventIds.h>
+#include <Context.h>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
@@ -18,8 +19,8 @@ void UpdateSystem::FixFrequency(int framesPerSecond)
 
 void UpdateSystem::Run()
 {
-    Context::Instance().GetEvents()->AddReceiver(EventId::Close, this);
-    Context::Instance().GetEvents()->AddReceiver(EventId::System, this);
+    Context::Instance().GetEvents()->AddReceiver(EID::WinClose, this);
+    Context::Instance().GetEvents()->AddReceiver(EID::System, this);
 
     sf::Clock clock;
     sf::Time elapsedTime;
@@ -38,8 +39,8 @@ void UpdateSystem::Run()
         elapsedTime = sf::Time::Zero;
     }
 
-    Context::Instance().GetEvents()->RemoveReceiver(EventId::System, this);
-    Context::Instance().GetEvents()->RemoveReceiver(EventId::Close, this);
+    Context::Instance().GetEvents()->RemoveReceiver(EID::System, this);
+    Context::Instance().GetEvents()->RemoveReceiver(EID::WinClose, this);
 }
 
 void UpdateSystem::NotifyAll(float data)
@@ -53,11 +54,11 @@ void UpdateSystem::NotifyAll(float data)
     }
 }
 
-void UpdateSystem::OnEvent(const std::pair<EventId, void*>& data)
+void UpdateSystem::OnEvent(const std::pair<uint32_t, void*>& data)
 {
     switch (data.first)
     {
-    case EventId::System:
+    case EID::System:
         {
             sf::Event* systemEvent = reinterpret_cast<sf::Event*>(data.second);
             switch (systemEvent->type)
@@ -73,7 +74,7 @@ void UpdateSystem::OnEvent(const std::pair<EventId, void*>& data)
             }
         }
     __fallthrough
-    case EventId::Close:
+    case EID::WinClose:
         mStopCycle = true;
         break;
 

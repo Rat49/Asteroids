@@ -1,4 +1,4 @@
-#include "InputSystem.h"
+#include <InputSystem.h>
 #include <algorithm>
 
 bool InputSystem::KeyboardInput::operator<(const InputSystem::KeyboardInput& other) const
@@ -19,7 +19,7 @@ InputSystem::~InputSystem()
 {
 }
 
-void InputSystem::BindAction(GameAction action, sf::Keyboard::Key key)
+void InputSystem::BindAction(int32_t action, sf::Keyboard::Key key)
 {
     const KeyboardInput tmp{ sf::Keyboard::Unknown, sf::Keyboard::Unknown, action, ActionState::InStill };
     auto it = std::lower_bound(mKeyboardInput.begin(), mKeyboardInput.end(), tmp);
@@ -43,7 +43,7 @@ void InputSystem::BindAction(GameAction action, sf::Keyboard::Key key)
     //error. all keys already set.
 }
 
-void InputSystem::UnbindAction(GameAction action)
+void InputSystem::UnbindAction(int32_t action)
 {
     const KeyboardInput tmp{ sf::Keyboard::Unknown, sf::Keyboard::Unknown, action, ActionState::InStill };
     auto it = std::find(mKeyboardInput.cbegin(), mKeyboardInput.cend(), tmp);
@@ -55,7 +55,7 @@ void InputSystem::UnbindAction(GameAction action)
     mKeyboardInput.erase(it);
 }
 
-ActionState InputSystem::GetState(GameAction action) const
+ActionState InputSystem::GetState(int32_t action) const
 {
     const KeyboardInput tmp{ sf::Keyboard::Unknown, sf::Keyboard::Unknown, action, ActionState::InStill };
     auto it = std::lower_bound(mKeyboardInput.cbegin(), mKeyboardInput.cend(), tmp);
@@ -67,7 +67,7 @@ ActionState InputSystem::GetState(GameAction action) const
     return it->State;
 }
 
-ActionState InputSystem::operator[](GameAction action) const
+ActionState InputSystem::operator[](int32_t action) const
 {
     return GetState(action);
 }

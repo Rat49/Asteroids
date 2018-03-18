@@ -1,7 +1,7 @@
 #pragma once
+#include <EventIds.h>
 #include <vector>
 #include <algorithm>
-#include "EventIds.h"
 
 template<typename Method, typename Data>
 class Broadcaster
@@ -45,40 +45,40 @@ template<typename Method, typename Data, typename Caster = Broadcaster<Method, D
 class MultiBroadcaster
 {
 public:
-    MultiBroadcaster() : mReceivers(static_cast<int>(EventId::MaxEvent)) {}
+    MultiBroadcaster(uint32_t maxEventsCount) : mReceivers(maxEventsCount) {}
     virtual ~MultiBroadcaster() {}
 
-    void AddReceiver(EventId id, Method* receiver)
+    void AddReceiver(EventID id, Method* receiver)
     {
-        if (id == EventId::Invalid)
+        if (id == EID::Invalid)
         {
             //invalid event id
             return;
         }
 
-        mReceivers[static_cast<int>(id)].AddReceiver(receiver);
+        mReceivers[id].AddReceiver(receiver);
     }
 
     void RemoveReceiver(EventId id, Method* receiver)
     {
-        if (id == EventId::Invalid)
+        if (id == EID::Invalid)
         {
             //invalid event id
             return;
         }
 
-        mReceivers[static_cast<int>(id)].RemoveReceiver(receiver);
+        mReceivers[id].RemoveReceiver(receiver);
     }
 
     void NotifyAll(EventId id, Data data)
     {
-        if (id == EventId::Invalid)
+        if (id == EID::Invalid)
         {
             //invalid event id
             return;
         }
 
-        mReceivers[static_cast<int>(id)].NotifyAll(data);
+        mReceivers[id].NotifyAll(data);
     }
 
 protected:

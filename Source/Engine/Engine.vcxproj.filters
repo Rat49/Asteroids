@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="RenderSystem">
+      <UniqueIdentifier>{26d12756-3c65-45dc-af6b-fce20b7766e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AudioSystem">
+      <UniqueIdentifier>{53c9b38f-23ac-4f7c-93af-d6905f9d0b29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputSystem">
+      <UniqueIdentifier>{020670e6-7c7e-4d28-93a0-bb31ddfb47d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UpdateSystem">
+      <UniqueIdentifier>{5a90edff-6aa4-4d2f-8874-96b66b57cefd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsSystem">
+      <UniqueIdentifier>{7ae2f157-43d3-4c40-95c9-735d777ba90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventSystem">
+      <UniqueIdentifier>{32c7f3d9-8ef7-4192-a46e-4872c0f90dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogicSystem">
+      <UniqueIdentifier>{a6dbf5d4-d313-4fb5-84b1-7b31702b0fea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{00a5e662-72df-4d82-b0ce-8268e6f208e8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderMethod.h">
+      <Filter>RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateSystem.h">
+      <Filter>UpdateSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateMethod.h">
+      <Filter>UpdateSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>PhysicsSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="EventMethod.h">
+      <Filter>EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem.h">
+      <Filter>EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Colliders.h">
+      <Filter>PhysicsSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Broadcaster.h">
+      <Filter>EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>LogicSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorMath.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.h" />
+    <ClInclude Include="Exports.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsMethod.h">
+      <Filter>PhysicsSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="EventIds.h">
+      <Filter>EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="LineShape.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RenderMethod.cpp">
+      <Filter>RenderSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>RenderSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateSystem.cpp">
+      <Filter>UpdateSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateMethod.cpp">
+      <Filter>UpdateSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsMethod.cpp">
+      <Filter>PhysicsSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>PhysicsSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Colliders.cpp">
+      <Filter>PhysicsSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem.cpp">
+      <Filter>EventSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>LogicSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="LineShape.cpp" />
+  </ItemGroup>
+</Project>

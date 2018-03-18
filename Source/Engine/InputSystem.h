@@ -1,6 +1,6 @@
 #pragma once
-#include "UpdateMethod.h"
-#include "InputGameAction.h"
+#include <Exports.h>
+#include <UpdateMethod.h>
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
 
@@ -12,17 +12,17 @@ enum class ActionState
     InAction,
 };
 
-class InputSystem final : UpdateMethod
+class ENGINE_EXPORT InputSystem final : UpdateMethod
 {
 public:
     InputSystem();
     ~InputSystem() override;
 
-    void BindAction(GameAction action, sf::Keyboard::Key key);
-    void UnbindAction(GameAction action);
+    void BindAction(int32_t action, sf::Keyboard::Key key);
+    void UnbindAction(int32_t action);
 
-    ActionState GetState(GameAction action) const;
-    ActionState operator[](GameAction action) const;
+    ActionState GetState(int32_t action) const;
+    ActionState operator[](int32_t action) const;
 
     void OnUpdate(float deltaTime) override;
 
@@ -31,7 +31,7 @@ private:
     {
         sf::Keyboard::Key Key;
         sf::Keyboard::Key Alt;
-        GameAction Action;
+        int32_t Action;
         ActionState State;
 
         bool operator<(const KeyboardInput& other) const;

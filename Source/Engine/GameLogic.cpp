@@ -1,5 +1,5 @@
-#include "GameLogic.h"
-#include "Context.h"
+#include <GameLogic.h>
+#include <Context.h>
 #include <SFML/Window/Window.hpp>
 #include <SFML/Window/Event.hpp>
 
@@ -24,5 +24,5 @@ void GameLogic::OnUpdate(float)
         return;
     }
 
-    Context::Instance().GetEvents()->Notify(EventId::System, &systemEvent);
+    Context::Instance().GetEvents()->Notify(EID::System, &systemEvent);
 }

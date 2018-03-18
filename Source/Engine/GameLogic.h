@@ -1,9 +1,10 @@
 #pragma once
-#include "UpdateMethod.h"
+#include <Exports.h>
+#include <UpdateMethod.h>
 
 namespace sf { class Window; }
 
-class GameLogic : UpdateMethod
+class ENGINE_EXPORT GameLogic : UpdateMethod
 {
 public:
     GameLogic();
