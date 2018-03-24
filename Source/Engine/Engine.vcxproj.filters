@@ -22,7 +22,10 @@
     <Filter Include="LogicSystem">
       <UniqueIdentifier>{a6dbf5d4-d313-4fb5-84b1-7b31702b0fea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core">
+    <Filter Include="Extension">
+      <UniqueIdentifier>{e68d7bae-b752-4c36-a322-85dd303fb72c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows">
       <UniqueIdentifier>{00a5e662-72df-4d82-b0ce-8268e6f208e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -60,12 +63,8 @@
     <ClInclude Include="GameLogic.h">
       <Filter>LogicSystem</Filter>
     </ClInclude>
-    <ClInclude Include="VectorMath.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Context.h" />
     <ClInclude Include="Exports.h">
-      <Filter>Core</Filter>
+      <Filter>Windows</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsMethod.h">
       <Filter>PhysicsSystem</Filter>
@@ -73,7 +72,13 @@
     <ClInclude Include="EventIds.h">
       <Filter>EventSystem</Filter>
     </ClInclude>
-    <ClInclude Include="LineShape.h" />
+    <ClInclude Include="LineShape.h">
+      <Filter>Extension</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorMath.h">
+      <Filter>Extension</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RenderMethod.cpp">
@@ -106,7 +111,14 @@
     <ClCompile Include="GameLogic.cpp">
       <Filter>LogicSystem</Filter>
     </ClCompile>
-    <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="LineShape.cpp" />
+    <ClCompile Include="LineShape.cpp">
+      <Filter>Extension</Filter>
+    </ClCompile>
+    <ClCompile Include="DllMain.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.h">
+      <Filter>Extension</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

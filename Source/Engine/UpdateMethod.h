@@ -1,15 +1,19 @@
 #pragma once
+#include <Exports.h>
 
-class UpdateMethod
+namespace sfe
 {
-public:
-    UpdateMethod();
-    virtual ~UpdateMethod();
+	class ENGINE_EXPORT UpdateMethod
+	{
+	public:
+		UpdateMethod();
+		virtual ~UpdateMethod();
 
-    virtual void OnUpdate(float deltaTime) = 0;
+		virtual void OnUpdate(float deltaTime) = 0;
 
-    bool IsUpdateEnabled() const { return mUpdateEnabled; }
+		bool IsUpdateEnabled() const { return mUpdateEnabled; }
 
-protected:
-    bool mUpdateEnabled = true;
-};
+	protected:
+		bool mUpdateEnabled = true;
+	};
+}

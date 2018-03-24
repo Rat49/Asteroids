@@ -1,6 +1,6 @@
 #pragma once
 #include <Exports.h>
-#include <SFML/System/Vector2.hpp>
+#include <Vector.h>
 
 namespace sf
 {
@@ -9,71 +9,74 @@ namespace sf
     class RectangleShape;
 }
 
-enum class ColliderType
+namespace sfe
 {
-    Invalid,
-    Line,
-    Circle,
-    Rectangle
-};
+	enum class ColliderType
+	{
+		Invalid,
+		Line,
+		Circle,
+		Rectangle
+	};
 
-class ENGINE_EXPORT Collider
-{
-public:
-    Collider() : mType(ColliderType::Invalid) {}
-    ColliderType GetType() const { return mType; }
+	class ENGINE_EXPORT Collider
+	{
+	public:
+		Collider() : mType(ColliderType::Invalid) {}
+		ColliderType GetType() const { return mType; }
 
-    virtual bool Contains(sf::Vector2f point) const = 0;
-    virtual bool Intersects(const Collider* other) const = 0;
+		virtual bool Contains(Vector2f point) const = 0;
+		virtual bool Intersects(const Collider* other) const = 0;
 
-	sf::Vector2f GetOrigin() const { return mOrigin; }
+		Vector2f GetOrigin() const { return mOrigin; }
 
-protected:
-    ColliderType mType;
-	sf::Vector2f mOrigin;
-};
+	protected:
+		ColliderType mType;
+		Vector2f mOrigin;
+	};
 
-class LineCollider : public Collider
-{
-public:
-    explicit LineCollider(const sf::LineShape* owner);
+	class LineCollider : public Collider
+	{
+	public:
+		explicit LineCollider(const sf::LineShape* owner);
 
-    bool Contains(sf::Vector2f point) const override;
-    bool Intersects(const Collider* other) const override;
+		bool Contains(Vector2f point) const override;
+		bool Intersects(const Collider* other) const override;
 
-	sf::Vector2f GetDirection() const { return mDirection; }
+		Vector2f GetDirection() const { return mDirection; }
 
-protected:
-    const sf::LineShape* mOwner;
-    sf::Vector2f mDirection;
-};
+	protected:
+		const sf::LineShape* mOwner;
+		Vector2f mDirection;
+	};
 
-class RectangleCollider : public Collider
-{
-public:
-    explicit RectangleCollider(const sf::RectangleShape* owner);
+	class RectangleCollider : public Collider
+	{
+	public:
+		explicit RectangleCollider(const sf::RectangleShape* owner);
 
-    bool Contains(sf::Vector2f point) const override;
-    bool Intersects(const Collider* other) const override;
+		bool Contains(Vector2f point) const override;
+		bool Intersects(const Collider* other) const override;
 
-	sf::Vector2f GetOppositePoint() const { return mOpposite; }
+		Vector2f GetOppositePoint() const { return mOpposite; }
 
-protected:
-    const sf::RectangleShape* mOwner;
-	sf::Vector2f mOpposite;
-};
+	protected:
+		const sf::RectangleShape* mOwner;
+		Vector2f mOpposite;
+	};
 
-class CircleCollider : public Collider
-{
-public:
-    explicit CircleCollider(const sf::CircleShape* owner);
+	class CircleCollider : public Collider
+	{
+	public:
+		explicit CircleCollider(const sf::CircleShape* owner);
 
-    bool Contains(sf::Vector2f point) const override;
-    bool Intersects(const Collider* other) const override;
+		bool Contains(Vector2f point) const override;
+		bool Intersects(const Collider* other) const override;
 
-	float GetRadius() const { return mRadius; }
+		float GetRadius() const { return mRadius; }
 
-protected:
-    const sf::CircleShape* mOwner;
-	float mRadius;
-};
+	protected:
+		const sf::CircleShape* mOwner;
+		float mRadius;
+	};
+}

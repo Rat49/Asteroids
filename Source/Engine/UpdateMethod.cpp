@@ -1,12 +1,14 @@
 #include <UpdateMethod.h>
 #include <Context.h>
 
+using namespace sfe;
+
 UpdateMethod::UpdateMethod()
 {
-    Context::Instance().GetUpdate()->AddReceiver(this);
+    Context::GetUpdate()->AddReceiver(this);
 }
 
 UpdateMethod::~UpdateMethod()
 {
-    Context::Instance().GetUpdate()->RemoveReceiver(this);
+    Context::GetUpdate()->RemoveReceiver(this);
 }

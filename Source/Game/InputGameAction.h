@@ -1,8 +1,8 @@
 #pragma once
 
-enum class GameAction
+enum GameAction
 {
-    MoveLeft,
+    MoveLeft = 0,
     MoveRight,
     MoveUp,
     MoveDown,

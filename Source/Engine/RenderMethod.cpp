@@ -1,13 +1,14 @@
-#include "RenderMethod.h"
-#include "Context.h"
+#include <RenderMethod.h>
+#include <Context.h>
 
+using namespace sfe;
 
 RenderMethod::RenderMethod()
 {
-    Context::Instance().GetRender()->AddReceiver(this);
+    Context::GetRender()->AddReceiver(this);
 }
 
 RenderMethod::~RenderMethod()
 {
-    Context::Instance().GetRender()->RemoveReceiver(this);
+    Context::GetRender()->RemoveReceiver(this);
 }

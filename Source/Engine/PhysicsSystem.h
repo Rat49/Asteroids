@@ -4,14 +4,15 @@
 #include <Broadcaster.h>
 #include <PhysicsMethod.h>
 
-class ENGINE_EXPORT PhysicsSystem final : public Broadcaster<PhysicsMethod, const Collider&>, public UpdateMethod
+namespace sfe
 {
-public:
-    PhysicsSystem();
-    ~PhysicsSystem() override;
+	class ENGINE_EXPORT PhysicsSystem final : public Broadcaster<PhysicsMethod, const Collider&>, public UpdateMethod
+	{
+	public:
+		PhysicsSystem();
+		~PhysicsSystem() override;
 
-    void OnUpdate(float deltaTime) override;
-    void NotifyAll(const Collider& other) override;
-};
-
-
+		void OnUpdate(float deltaTime) override;
+		void NotifyAll(const Collider& other) override;
+	};
+}

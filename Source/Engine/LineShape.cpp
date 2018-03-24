@@ -3,7 +3,6 @@
 
 namespace sf
 {
-
     LineShape::LineShape(const Vector2f& direction)
         : m_direction(direction)
     {
@@ -16,6 +15,6 @@ namespace sf
     Vector2f LineShape::getPoint(std::size_t index) const
     {
         assert(index < getPointCount());
-
+		return getPosition();//TODO: fix this
     }
 }

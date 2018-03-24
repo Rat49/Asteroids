@@ -3,6 +3,8 @@
 #include <cassert>
 #include <SFML/Graphics.hpp>
 
+using namespace sfe;
+
 namespace
 {
     bool __Intersects(const LineCollider* a, const LineCollider* b)
@@ -14,7 +16,7 @@ namespace
 
     bool __Intersects(const CircleCollider* a, const CircleCollider* b)
     {
-		const auto distance = VectorMath::SqrLength(a->GetOrigin() - b->GetOrigin());
+		const auto distance = (a->GetOrigin() - b->GetOrigin()).SqrLength();
 		const auto radiuses = std::powf(a->GetRadius() + b->GetRadius(), 2);
 		return distance <= radiuses;
     }
@@ -51,9 +53,9 @@ namespace
     bool __Intersects(const LineCollider* a, const CircleCollider* b)
     {
 		const auto distance = a->GetOrigin() - b->GetOrigin();
-		const auto ap = VectorMath::Dot(a->GetDirection(), a->GetDirection());
-		const auto bp = VectorMath::Dot(distance, a->GetDirection());
-		const auto cp = VectorMath::Dot(distance, distance) - std::pow(b->GetRadius(), 2);
+		const auto ap = a->GetDirection() * a->GetDirection();
+		const auto bp = distance * a->GetDirection();
+		const auto cp = distance * distance - std::pow(b->GetRadius(), 2);
 
 		const auto disc = bp * bp - ap * cp;
 		return disc >= 0.0f;
@@ -63,14 +65,14 @@ namespace
     {
 		const auto b1 = b->GetOrigin();
 		const auto b3 = b->GetOppositePoint();
-		const auto b2 = sf::Vector2f(b1.x, b3.y);
-		const auto b4 = sf::Vector2f(b3.x, b1.y);
+		const auto b2 = sfe::Vector2f(b1.x, b3.y);
+		const auto b4 = sfe::Vector2f(b3.x, b1.y);
 		const auto a1 = a->GetOrigin();
 		const auto dist = std::pow(a->GetRadius(), 2);
-		return VectorMath::SqrLength(a1 - b1) <= dist
-			|| VectorMath::SqrLength(a1 - b2) <= dist
-			|| VectorMath::SqrLength(a1 - b3) <= dist
-			|| VectorMath::SqrLength(a1 - b4) <= dist;
+		return (a1 - b1).SqrLength() <= dist
+			|| (a1 - b2).SqrLength() <= dist
+			|| (a1 - b3).SqrLength() <= dist
+			|| (a1 - b4).SqrLength() <= dist;
     }
 
     bool __Intersects(const RectangleCollider* a, const LineCollider* b)
@@ -87,7 +89,7 @@ LineCollider::LineCollider(const sf::LineShape* owner) : mOwner(owner)
     mType = ColliderType::Line;
 }
 
-bool LineCollider::Contains(sf::Vector2f point) const
+bool LineCollider::Contains(Vector2f point) const
 {
 	return ((point.x - mOrigin.x) / mDirection.x) == ((point.y - mOrigin.y) / mDirection.y);
 }
@@ -116,7 +118,7 @@ RectangleCollider::RectangleCollider(const sf::RectangleShape* owner) : mOwner(o
     mType = ColliderType::Rectangle;
 }
 
-bool RectangleCollider::Contains(sf::Vector2f point) const
+bool RectangleCollider::Contains(Vector2f point) const
 {
 	if (std::fmin(mOrigin.x, mOpposite.x) > point.x) return false;
 	if (std::fmin(mOrigin.y, mOpposite.y) > point.y) return false;
@@ -149,9 +151,9 @@ CircleCollider::CircleCollider(const sf::CircleShape* owner) : mOwner(owner)
     mType = ColliderType::Circle;
 }
 
-bool CircleCollider::Contains(sf::Vector2f point) const
+bool CircleCollider::Contains(Vector2f point) const
 {
-	return VectorMath::SqrLength(mOrigin - point) <= (mRadius * mRadius);
+	return (mOrigin - point).SqrLength() <= (mRadius * mRadius);
 }
 
 bool CircleCollider::Intersects(const Collider* other) const

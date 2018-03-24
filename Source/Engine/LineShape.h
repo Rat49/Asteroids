@@ -1,11 +1,12 @@
 #pragma once
+#include <Exports.h>
 #include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/Shape.hpp>
 
 
 namespace sf
 {
-    class SFML_GRAPHICS_API LineShape : public Shape
+    class ENGINE_EXPORT LineShape : public Shape
     {
     public:
         explicit LineShape(const Vector2f& direction = Vector2f(1, 1));

@@ -1,16 +1,20 @@
 #pragma once
+#include <Exports.h>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-class RenderMethod
+namespace sfe
 {
-public:
-    RenderMethod();
-    virtual ~RenderMethod();
+	class ENGINE_EXPORT RenderMethod
+	{
+	public:
+		RenderMethod();
+		virtual ~RenderMethod();
 
-    virtual void OnRender(const sf::RenderTarget& data) = 0;
+		virtual void OnRender(const sf::RenderTarget& data) = 0;
 
-    bool IsRenderEnabled() const { return mRenderEnabled; }
+		bool IsRenderEnabled() const { return mRenderEnabled; }
 
-protected:
-    bool mRenderEnabled = false;
-};
+	protected:
+		bool mRenderEnabled = false;
+	};
+}
