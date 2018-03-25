@@ -13,6 +13,7 @@ public:
 
 private:
 	std::unique_ptr<Ship> mPlayer;
+	std::unique_ptr<Rock> mRock;
 	//rocks should be in pool
 	//bullets should be in pool
 };

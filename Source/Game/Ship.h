@@ -22,6 +22,6 @@ private:
 	sf::Sprite mShape;
 	sfe::CircleCollider mCollider;
 	sfe::Vector2<float> mPrevMovement;
-	float mExtinction;
+	float mSpeed;
 };
 

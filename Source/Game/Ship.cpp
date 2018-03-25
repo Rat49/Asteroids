@@ -18,6 +18,9 @@ namespace
 	}
 
 	sfe::Vector2<float> Zero;
+	float MaxSpeed = 500;
+	float AccumSpeed = 50;
+	float BreakSpeed = 10;
 }
 
 Ship::Ship()
@@ -34,6 +37,8 @@ Ship::Ship()
 	mShape.setColor(sf::Color::White);
 	mShape.setPosition(center.x * 0.5f, center.y * 0.5f);
 	mShape.setOrigin(0.5f, 0.5f);
+
+	mSpeed = 0.f;
 }
 
 Ship::~Ship()
@@ -42,23 +47,23 @@ Ship::~Ship()
 
 void Ship::OnUpdate(float deltaTime)
 {
-	const auto offset = GetMovement() * deltaTime;
+	const auto offset = GetMovement();
 	if (offset == Zero)
 	{
-		mExtinction -= 0.01f;
-		if (mExtinction <= 0)
+		mSpeed -= BreakSpeed;
+		if (mSpeed <= 0.f)
 		{
-			mExtinction = 0;
+			mSpeed = 0.f;
 			return;
 		}
 	}
 	else
 	{
+		mSpeed = std::min(MaxSpeed, mSpeed + AccumSpeed);
 		mPrevMovement = offset;
-		mExtinction = 1;
 	}
 
-	mShape.move(mPrevMovement * deltaTime * 10000 * mExtinction);
+	mShape.move(mPrevMovement * deltaTime * mSpeed);
 }
 
 void Ship::OnRender(sf::RenderTarget& data)
