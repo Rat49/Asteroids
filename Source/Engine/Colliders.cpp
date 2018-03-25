@@ -1,7 +1,5 @@
 #include <Colliders.h>
-#include <VectorMath.h>
 #include <cassert>
-#include <SFML/Graphics.hpp>
 
 using namespace sfe;
 
@@ -82,16 +80,38 @@ namespace
     }
 }
 
+Collider::Collider(const sf::Transformable* owner)
+	: mOwner(owner)
+	, mType(ColliderType::Invalid)
+{
+}
+
+ColliderType Collider::GetType() const
+{
+	return mType;
+}
+
+Vector2f Collider::GetOrigin() const
+{
+	return Vector2f(mOwner->getPosition());
+}
+
 #pragma region -Line-collider-
 
-LineCollider::LineCollider(const sf::LineShape* owner) : mOwner(owner)
+LineCollider::LineCollider(const sf::Transformable* owner)
+	: Collider(owner)
 {
     mType = ColliderType::Line;
 }
 
+Vector2f LineCollider::GetDirection() const
+{
+	return mDirection;
+}
+
 bool LineCollider::Contains(Vector2f point) const
 {
-	return ((point.x - mOrigin.x) / mDirection.x) == ((point.y - mOrigin.y) / mDirection.y);
+	return ((point.x - GetOrigin().x) / GetDirection().x) == ((point.y - GetOrigin().y) / GetDirection().y);
 }
 
 bool LineCollider::Intersects(const Collider* other) const
@@ -113,17 +133,23 @@ bool LineCollider::Intersects(const Collider* other) const
 #pragma endregion
 #pragma region -Rectangle-collider-
 
-RectangleCollider::RectangleCollider(const sf::RectangleShape* owner) : mOwner(owner)
+RectangleCollider::RectangleCollider(const sf::Transformable* owner)
+	: Collider(owner)
 {
-    mType = ColliderType::Rectangle;
+	mType = ColliderType::Rectangle;
+}
+
+Vector2f RectangleCollider::GetOppositePoint() const
+{
+	return mOpposite;
 }
 
 bool RectangleCollider::Contains(Vector2f point) const
 {
-	if (std::fmin(mOrigin.x, mOpposite.x) > point.x) return false;
-	if (std::fmin(mOrigin.y, mOpposite.y) > point.y) return false;
-	if (std::fmax(mOrigin.x, mOpposite.x) < point.x) return false;
-	if (std::fmax(mOrigin.y, mOpposite.y) < point.y) return false;
+	if (std::fmin(GetOrigin().x, GetOppositePoint().x) > point.x) return false;
+	if (std::fmin(GetOrigin().y, GetOppositePoint().y) > point.y) return false;
+	if (std::fmax(GetOrigin().x, GetOppositePoint().x) < point.x) return false;
+	if (std::fmax(GetOrigin().y, GetOppositePoint().y) < point.y) return false;
 	return true;
 }
 
@@ -146,14 +172,20 @@ bool RectangleCollider::Intersects(const Collider* other) const
 #pragma endregion
 #pragma region -Circle-collider-
 
-CircleCollider::CircleCollider(const sf::CircleShape* owner) : mOwner(owner)
+CircleCollider::CircleCollider(const sf::Transformable* owner)
+	: Collider(owner)
 {
-    mType = ColliderType::Circle;
+	mType = ColliderType::Circle;
+}
+
+float CircleCollider::GetRadius() const
+{
+	return mRadius;
 }
 
 bool CircleCollider::Contains(Vector2f point) const
 {
-	return (mOrigin - point).SqrLength() <= (mRadius * mRadius);
+	return (GetOrigin() - point).SqrLength() <= (GetRadius() * GetRadius());
 }
 
 bool CircleCollider::Intersects(const Collider* other) const

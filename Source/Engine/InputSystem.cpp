@@ -57,6 +57,18 @@ void InputSystem::UnbindAction(int32_t action)
     mKeyboardInput.erase(it);
 }
 
+bool InputSystem::IsInProgress(int32_t action) const
+{
+	switch (GetState(action))
+	{
+	case ActionState::InAction:
+	case ActionState::JustEntered:
+		return true;
+	default:
+		return false;
+	}
+}
+
 ActionState InputSystem::GetState(int32_t action) const
 {
     const KeyboardInput tmp{ sf::Keyboard::Unknown, sf::Keyboard::Unknown, action, ActionState::InStill };

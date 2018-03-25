@@ -1,15 +1,8 @@
 #include <Context.h>
 #include <InputGameAction.h>
+#include <AsteroidsLogic.h>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <memory>
-
-class AsteroidsLogic : sfe::GameLogic
-{
-public:
-	void CustomUpdate(float deltaTime) override
-	{
-	}
-};
 
 void WinMain()
 {
@@ -39,6 +32,7 @@ void WinMain()
     Context::GetInput()->BindAction(GameAction::Menu, sf::Keyboard::Escape);
 
 	AsteroidsLogic logic;
+	logic.Setup();
 
 	//start update
     Context::GetUpdate()->Run();

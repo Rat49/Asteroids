@@ -10,11 +10,11 @@ namespace sfe
 		RenderMethod();
 		virtual ~RenderMethod();
 
-		virtual void OnRender(const sf::RenderTarget& data) = 0;
+		virtual void OnRender(sf::RenderTarget& data) = 0;
 
 		bool IsRenderEnabled() const { return mRenderEnabled; }
 
 	protected:
-		bool mRenderEnabled = false;
+		bool mRenderEnabled = true;
 	};
 }

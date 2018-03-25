@@ -58,20 +58,20 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Source\Game;$(SolutionDir)Source\Engine;$(SolutionDir)SFML\$(Platform)\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SFML_STATIC;_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)SFML\$(Platform)\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-window-d.lib;sfml-system-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-network-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)SFML\$(Platform)\bin\openal32.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-audio-d-2.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-graphics-d-2.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-network-d-2.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-system-d-2.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-window-d-2.dll" "$(OutDir)\*.*"
-</Command>
+      <Command>xcopy "$(SolutionDir)Source\Images\*.*" "$(OutDir)\Resources\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\openal32.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-audio-d-2.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-graphics-d-2.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-network-d-2.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-system-d-2.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-window-d-2.dll" "$(OutDir)\*.*" /F /R /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -82,7 +82,7 @@ copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-window-d-2.dll" "$(OutDir)\*.*"
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Source\Game;$(SolutionDir)Source\Engine;$(SolutionDir)SFML\$(Platform)\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SFML_STATIC;NDEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -91,20 +91,29 @@ copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-window-d-2.dll" "$(OutDir)\*.*"
       <AdditionalDependencies>sfml-window.lib;sfml-system.lib;sfml-graphics.lib;sfml-audio.lib;sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)SFML\$(Platform)\bin\openal32.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-audio-2.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-graphics-2.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-network-2.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-system-2.dll" "$(OutDir)\*.*"
-copy "$(SolutionDir)SFML\$(Platform)\bin\sfml-window-2.dll" "$(OutDir)\*.*"
+      <Command>xcopy "$(SolutionDir)Source\Images\*.*" "$(OutDir)\Resources\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\openal32.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-audio-2.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-graphics-2.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-network-2.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-system-2.dll" "$(OutDir)\*.*" /F /R /Y /I
+xcopy "$(SolutionDir)SFML\$(Platform)\bin\sfml-window-2.dll" "$(OutDir)\*.*" /F /R /Y /I
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AsteroidsLogic.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="Ship.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AsteroidsLogic.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="InputGameAction.h" />
+    <ClInclude Include="Rock.h" />
+    <ClInclude Include="Ship.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

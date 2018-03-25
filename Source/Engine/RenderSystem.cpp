@@ -19,7 +19,7 @@ void RenderSystem::OnUpdate(float deltaTime)
 	mRenderWindow->display();
 }
 
-void RenderSystem::NotifyAll(const sf::RenderTarget& target)
+void RenderSystem::NotifyAll(sf::RenderTarget& target)
 {
     for (auto& receiver : mReceivers)
     {

@@ -9,23 +9,40 @@ namespace sfe
 	class ENGINE_EXPORT Vector2
 	{
 	public:
-		Vector2() : x(0), y(0) {}
-		Vector2(T X, T Y) : x(X), y(Y) {}
+		Vector2()
+			: x(0)
+			, y(0)
+		{
+		}
+
+		Vector2(T X, T Y)
+			: x(X)
+			, y(Y)
+		{
+		}
 
 		template <typename U>
-		explicit Vector2(const Vector2<U>& vector) : x(static_cast<T>(U.x)), y(static_cast<T>(U.y)) {}
+		explicit Vector2(const Vector2<U>& other)
+			: x(static_cast<T>(other.x))
+			, y(static_cast<T>(other.y))
+		{
+		}
 
 		template <typename U>
-		explicit Vector2(const sf::Vector2<U>& vector) : x(static_cast<T>(U.x)), y(static_cast<T>(U.y)) {}
+		explicit Vector2(const sf::Vector2<U>& other)
+			: x(static_cast<T>(other.x))
+			, y(static_cast<T>(other.y))
+		{
+		}
 
-		Vector2<T>& operator=(const Vector2<T>& other)
+		Vector2& operator=(const Vector2& other)
 		{
 			x = other.x;
 			y = other.y;
 			return *this;
 		}
 
-		Vector2<T>& operator=(const sf::Vector2<T>& other)
+		Vector2& operator=(const sf::Vector2<T>& other)
 		{
 			x = other.x;
 			y = other.y;
@@ -37,68 +54,68 @@ namespace sfe
 			return sf::Vector2<T>(x, y);
 		}
 
-		Vector2<T> operator -()
+		Vector2 operator -() const
 		{
-			return Vector2<T>(-x, -y);
+			return Vector2(-x, -y);
 		}
 
-		Vector2<T> operator +(const Vector2<T>& right) const
+		Vector2 operator +(const Vector2& right) const
 		{
-			return Vector2<T>(x + right.x, y + right.x);
+			return Vector2(x + right.x, y + right.x);
 		}
 
-		Vector2<T> operator -(const Vector2<T>& right) const
+		Vector2 operator -(const Vector2& right) const
 		{
-			return Vector2<T>(x - right.x, y - right.x);
+			return Vector2(x - right.x, y - right.x);
 		}
 
-		Vector2<T> operator *(const T right) const
+		Vector2 operator *(const T right) const
 		{
-			return Vector2<T>(x * right, y * right);
+			return Vector2(x * right, y * right);
 		}
 
-		Vector2<T> operator /(const T right) const
+		Vector2 operator /(const T right) const
 		{
-			return Vector2<T>(x / right, y / right);
+			return Vector2(x / right, y / right);
 		}
 
-		T operator *(const Vector2<T>& right) const
+		T operator *(const Vector2& right) const
 		{
 			return static_cast<T>(x * right.x +  y * right.y);
 		}
 
-		bool operator ==(const Vector2<T>& right)
+		bool operator ==(const Vector2& right) const
 		{
 			return (x == right.x) && (y == right.y);
 		}
 
-		bool operator !=(const Vector2<T>& right)
+		bool operator !=(const Vector2& right) const
 		{
 			return !(*this == right);
 		}
 
-		Vector2<T>& operator +=(const Vector2<T>& right)
+		Vector2& operator +=(const Vector2& right)
 		{
 			x += right.x;
 			y += right.y;
 			return *this;
 		}
 
-		Vector2<T>& operator -=(const Vector2<T>& right)
+		Vector2& operator -=(const Vector2& right)
 		{
 			x -= right.x;
 			y -= right.y;
 			return *this;
 		}
 
-		Vector2<T>& operator *=(T right)
+		Vector2& operator *=(T right)
 		{
 			x *= right;
 			y *= right;
 			return *this;
 		}
 
-		Vector2<T>& operator /=(T right)
+		Vector2& operator /=(T right)
 		{
 			x /= right;
 			y /= right;
@@ -110,33 +127,38 @@ namespace sfe
 			return x * x + y * y;
 		}
 
-		T Length() const
+		float Length() const
 		{
-			return static_cast<T>(std::sqrtf(SqrLength()));
+			return std::sqrtf(static_cast<float>(SqrLength()));
 		}
 
-		Vector2<T>& Normalize()
+		Vector2& Normalize()
 		{
-			*this *= (1 / Length());
+			float c = (1.f / Length());
+			x = static_cast<T>(std::ceilf(x * c));
+			y = static_cast<T>(std::ceilf(y * c));
+			return *this;
 		}
 
-		Vector2<T> GetNormalized()
+		Vector2 GetNormalized() const
 		{
-			Vector2<T> tmp(*this);
+			Vector2 tmp(*this);
 			tmp.Normalize();
 			return tmp;
 		}
 
-		float AngleWith(const Vector2<T>& right)
+		float AngleWith(const Vector2& right) const
 		{
-			return std::acosf(*this * right) / (Length() * right.Length());
+			return std::acosf(static_cast<float>(*this * right)) / (Length() * right.Length());
 		}
 
 		T x;
 		T y;
 	};
 
+	template class ENGINE_EXPORT Vector2<float>;
+	template class ENGINE_EXPORT Vector2<int>;
+
 	using Vector2f = Vector2<float>;
-	using Vector2u = Vector2<unsigned int>;
 	using Vector2i = Vector2<int>;
 }

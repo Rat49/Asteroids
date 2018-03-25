@@ -75,9 +75,6 @@
     <ClInclude Include="LineShape.h">
       <Filter>Extension</Filter>
     </ClInclude>
-    <ClInclude Include="VectorMath.h">
-      <Filter>Extension</Filter>
-    </ClInclude>
     <ClInclude Include="Context.h" />
   </ItemGroup>
   <ItemGroup>
@@ -114,11 +111,11 @@
     <ClCompile Include="LineShape.cpp">
       <Filter>Extension</Filter>
     </ClCompile>
-    <ClCompile Include="DllMain.cpp">
-      <Filter>Windows</Filter>
-    </ClCompile>
     <ClCompile Include="Vector.h">
       <Filter>Extension</Filter>
+    </ClCompile>
+    <ClCompile Include="DllMain.cpp">
+      <Filter>Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

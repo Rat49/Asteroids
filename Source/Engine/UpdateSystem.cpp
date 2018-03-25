@@ -67,10 +67,6 @@ void UpdateSystem::OnEvent(const std::pair<uint32_t, void*>& data)
 		{
 		case sf::Event::Closed:
 			break;
-			//case sf::Event::KeyPressed:
-			//    if (!systemEvent->key.alt || systemEvent->key.code != sf::Keyboard::F4)
-			//        return;
-			//    break;
 		default:
 			return;
 		}

@@ -5,7 +5,7 @@ namespace sfe
 {
 	using EventID = uint32_t;
 
-	struct EID
+	struct ENGINE_EXPORT EID
 	{
 		static constexpr EventID Invalid = 0xFFFFFFFF;
 		static constexpr EventID System = 0;

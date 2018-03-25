@@ -23,6 +23,7 @@ namespace sfe
 		void BindAction(int32_t action, sf::Keyboard::Key key);
 		void UnbindAction(int32_t action);
 
+		bool IsInProgress(int32_t action) const;
 		ActionState GetState(int32_t action) const;
 		ActionState operator[](int32_t action) const;
 

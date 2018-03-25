@@ -59,6 +59,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)SFML\$(Platform)\include;$(SolutionDir)Source\Engine;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>ENGINE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sfml-window-d.lib;sfml-system-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-network-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -99,7 +100,6 @@
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="UpdateMethod.h" />
     <ClInclude Include="UpdateSystem.h" />
-    <ClInclude Include="VectorMath.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Colliders.cpp" />
