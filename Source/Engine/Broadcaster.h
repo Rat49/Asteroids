@@ -59,7 +59,7 @@ public:
         mReceivers[id].AddReceiver(receiver);
     }
 
-    void RemoveReceiver(EventId id, Method* receiver)
+    void RemoveReceiver(EventID id, Method* receiver)
     {
         if (id == EID::Invalid)
         {
@@ -70,7 +70,7 @@ public:
         mReceivers[id].RemoveReceiver(receiver);
     }
 
-    void NotifyAll(EventId id, Data data)
+    void NotifyAll(EventID id, Data data)
     {
         if (id == EID::Invalid)
         {

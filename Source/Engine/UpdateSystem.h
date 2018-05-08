@@ -3,7 +3,7 @@
 #include <UpdateMethod.h>
 #include <EventMethod.h>
 
-class UpdateSystem : public Broadcaster<UpdateMethod, float>, EventMethod
+class ENGINE_EXPORT UpdateSystem : public Broadcaster<UpdateMethod, float>, EventMethod
 {
 public:
     UpdateSystem();

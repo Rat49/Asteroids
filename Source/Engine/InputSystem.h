@@ -2,6 +2,7 @@
 #include <Exports.h>
 #include <UpdateMethod.h>
 #include <vector>
+#include <cstdint>
 #include <SFML/Window/Keyboard.hpp>
 
 enum class ActionState

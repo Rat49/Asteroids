@@ -12,5 +12,6 @@ public:
 class ENGINE_EXPORT EventSystem : public MultiBroadcaster<EventMethod, const std::pair<EventID, void*>&, EventCaster>
 {
 public:
+    EventSystem();
     void Notify(EventID id, void* data);
 };

@@ -1,6 +1,7 @@
 #include <Context.h>
+#include <InputGameAction.h>
 
-void WinMain()
+int main()
 {
     Context::Instance().GetUpdate()->FixFrequency(75);
 
@@ -15,6 +16,6 @@ void WinMain()
     Context::Instance().GetInput()->BindAction(GameAction::Shoot, sf::Keyboard::Space);
     Context::Instance().GetInput()->BindAction(GameAction::Menu, sf::Keyboard::Escape);
 
-
     Context::Instance().GetUpdate()->Run();
+    return 0;
 }

@@ -12,4 +12,6 @@ struct EID
     static constexpr EventID Update = 2;
 
     static constexpr EventID WinClose = 10;
+
+    static constexpr uint32_t MaxEventsCount = 32;
 };

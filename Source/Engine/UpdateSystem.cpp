@@ -73,7 +73,7 @@ void UpdateSystem::OnEvent(const std::pair<uint32_t, void*>& data)
                 return;
             }
         }
-    __fallthrough
+    //__fallthrough
     case EID::WinClose:
         mStopCycle = true;
         break;

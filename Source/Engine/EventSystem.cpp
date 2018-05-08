@@ -12,6 +12,11 @@ void EventCaster::NotifyAll(const std::pair<EventID, void*>& data)
     }
 }
 
+EventSystem::EventSystem()
+: MultiBroadcaster(EID::MaxEventsCount)
+{
+}
+
 void EventSystem::Notify(EventID id, void* data)
 {
     NotifyAll(id, std::make_pair(id, data));

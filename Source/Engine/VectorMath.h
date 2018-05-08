@@ -1,7 +1,7 @@
 #pragma once
 #include <Exports.h>
 #include <cmath>
-#include <SFML\System\Vector2.hpp>
+#include <SFML/System/Vector2.hpp>
 
 namespace VectorMath
 {
@@ -12,7 +12,7 @@ namespace VectorMath
 
 	inline float ENGINE_EXPORT Length(sf::Vector2f vec)
 	{
-		return std::sqrtf(SqrLength(vec));
+		return std::sqrt(SqrLength(vec));
 	}
 
 	inline sf::Vector2f ENGINE_EXPORT Normalize(sf::Vector2f vec)
@@ -27,6 +27,6 @@ namespace VectorMath
 
 	inline float ENGINE_EXPORT Angle(sf::Vector2f a, sf::Vector2f b)
 	{
-		return std::acosf(Dot(a, b) / (Length(a) * Length(b)));
+		return std::acos(Dot(a, b) / (Length(a) * Length(b)));
 	}
 }

@@ -1,5 +1,6 @@
 #include <LineShape.h>
 #include <cassert>
+#include "LineShape.h"
 
 namespace sf
 {
@@ -16,6 +17,6 @@ namespace sf
     Vector2f LineShape::getPoint(std::size_t index) const
     {
         assert(index < getPointCount());
-
+        return sf::Vector2f();
     }
 }

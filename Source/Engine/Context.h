@@ -7,7 +7,7 @@
 #include <GameLogic.h>
 #include <memory>
 
-class Context final
+class ENGINE_EXPORT Context final
 {
 public:
 	static Context& Instance()

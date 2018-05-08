@@ -1,6 +1,6 @@
 #pragma once
 
-enum class GameAction
+enum GameAction : int32_t
 {
     MoveLeft,
     MoveRight,

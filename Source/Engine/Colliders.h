@@ -33,7 +33,7 @@ protected:
 	sf::Vector2f mOrigin;
 };
 
-class LineCollider : public Collider
+class ENGINE_EXPORT LineCollider : public Collider
 {
 public:
     explicit LineCollider(const sf::LineShape* owner);
@@ -48,7 +48,7 @@ protected:
     sf::Vector2f mDirection;
 };
 
-class RectangleCollider : public Collider
+class ENGINE_EXPORT RectangleCollider : public Collider
 {
 public:
     explicit RectangleCollider(const sf::RectangleShape* owner);
@@ -63,7 +63,7 @@ protected:
 	sf::Vector2f mOpposite;
 };
 
-class CircleCollider : public Collider
+class ENGINE_EXPORT CircleCollider : public Collider
 {
 public:
     explicit CircleCollider(const sf::CircleShape* owner);

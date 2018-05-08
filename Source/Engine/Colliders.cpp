@@ -15,7 +15,7 @@ namespace
     bool __Intersects(const CircleCollider* a, const CircleCollider* b)
     {
 		const auto distance = VectorMath::SqrLength(a->GetOrigin() - b->GetOrigin());
-		const auto radiuses = std::powf(a->GetRadius() + b->GetRadius(), 2);
+		const auto radiuses = std::pow(a->GetRadius() + b->GetRadius(), 2);
 		return distance <= radiuses;
     }
 
@@ -80,7 +80,7 @@ namespace
     }
 }
 
-#pragma region -Line-collider-
+//#pragma region -Line-collider-
 
 LineCollider::LineCollider(const sf::LineShape* owner) : mOwner(owner)
 {
@@ -108,8 +108,8 @@ bool LineCollider::Intersects(const Collider* other) const
 	}
 }
 
-#pragma endregion
-#pragma region -Rectangle-collider-
+//#pragma endregion
+//#pragma region -Rectangle-collider-
 
 RectangleCollider::RectangleCollider(const sf::RectangleShape* owner) : mOwner(owner)
 {
@@ -141,8 +141,8 @@ bool RectangleCollider::Intersects(const Collider* other) const
 	}
 }
 
-#pragma endregion
-#pragma region -Circle-collider-
+//#pragma endregion
+//#pragma region -Circle-collider-
 
 CircleCollider::CircleCollider(const sf::CircleShape* owner) : mOwner(owner)
 {
@@ -170,4 +170,4 @@ bool CircleCollider::Intersects(const Collider* other) const
 	}
 }
 
-#pragma endregion
+//#pragma endregion
