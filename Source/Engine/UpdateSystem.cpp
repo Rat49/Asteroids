@@ -61,20 +61,13 @@ void UpdateSystem::OnEvent(const std::pair<uint32_t, void*>& data)
     {
     case EID::System:
         systemEvent = reinterpret_cast<sf::Event*>(data.second);
-        switch (systemEvent->type)
-        {
-        case sf::Event::Closed:
-            break;
-        case sf::Event::KeyPressed:
-            if (systemEvent->key.code == sf::Keyboard::Escape)
-            {
-                mStopCycle = true;
-            }
-            break;
-        default:
-            break;
-        }
+		if (systemEvent->type == sf::Event::Closed ||
+			(systemEvent->type == sf::Event::KeyPressed &&systemEvent->key.code == sf::Keyboard::Escape))
+		{
+			mStopCycle = true;
+		}
         break;
+
     case EID::WinClose:
         mStopCycle = true;
         break;

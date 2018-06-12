@@ -1,4 +1,4 @@
 .vs
-cmake-build*
 Bin
 Temp
+*.vcxproj.user

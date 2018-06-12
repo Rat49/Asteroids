@@ -2,7 +2,12 @@
 #include <Game/InputGameAction.h>
 #include <Game/Spaceship.h>
 
-int main()
+#ifdef _WINDOWS
+#include <Windows.h>
+int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
+#else
+int main(int argc, char** argv)
+#endif
 {
     /// INIT SCREEN
     Context::Instance().GetUpdate()->FixFrequency(75);
