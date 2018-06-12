@@ -29,6 +29,18 @@ file(GLOB ENGINE_HEADERS "${ENGINE_DIR}/*.h")
 file(GLOB GAME_SOURCES "${GAME_DIR}/*.cpp")
 file(GLOB GAME_HEADERS "${GAME_DIR}/*.h")
 
+if (WIN32)
+	set(EXE_EXT ".exe")
+	set(DLL_EXT ".dll")
+	set(SFML_EXT ".lib")
+	set(LIB_PREFIX "")
+elseif(UNIX)
+	set(EXE_EXT "")
+	set(DLL_EXT ".so")
+	set(SFML_EXT ".so.2.5")
+	set(LIB_PREFIX "lib")
+endif()
+
 add_library(${ENGINE_LIB} SHARED ${ENGINE_SOURCES} ${ENGINE_HEADERS})
 add_executable(${GAME_EXEC} ${GAME_SOURCES} ${GAME_HEADERS})
 
@@ -42,8 +54,8 @@ target_include_directories(${GAME_EXEC}
         PRIVATE ${SFML_INCLUDE_DIR})
 
 if(${CMAKE_BUILD_TYPE} MATCHES Debug)
-    set_target_properties(${ENGINE_LIB} PROPERTIES SUFFIX "-d.so")
-    set_target_properties(${GAME_EXEC} PROPERTIES SUFFIX "-d")
+    set_target_properties(${ENGINE_LIB} PROPERTIES SUFFIX "-d${DLL_EXT}")
+    set_target_properties(${GAME_EXEC} PROPERTIES SUFFIX "-d${EXE_EXT}")
     target_compile_definitions(${ENGINE_LIB}
             PRIVATE _DEBUG
             PRIVATE _LINUX
@@ -52,13 +64,13 @@ if(${CMAKE_BUILD_TYPE} MATCHES Debug)
             PRIVATE _DEBUG
             PRIVATE _LINUX
             PRIVATE SFML_STATIC)
-    set(SFML_WINDOW_LIB ${SFML_LIBRARY_DIR}/libsfml-window-d.so.2.5)
-    set(SFML_SYSTEM_LIB ${SFML_LIBRARY_DIR}/libsfml-system-d.so.2.5)
-    set(SFML_GRAPHICS_LIB ${SFML_LIBRARY_DIR}/libsfml-graphics-d.so.2.5)
-    set(SFML_AUDIO_LIB ${SFML_LIBRARY_DIR}/libsfml-audio-d.so.2.5)
-    set(SFML_NETWORK_LIB ${SFML_LIBRARY_DIR}/libsfml-network-d.so.2.5)
+    set(SFML_WINDOW_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-window-d${SFML_EXT})
+    set(SFML_SYSTEM_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-system-d${SFML_EXT})
+    set(SFML_GRAPHICS_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-graphics-d${SFML_EXT})
+    set(SFML_AUDIO_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-audio-d${SFML_EXT})
+    set(SFML_NETWORK_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-network-d${SFML_EXT})
 else()
-    set_target_properties(${ENGINE_LIB} PROPERTIES SUFFIX ".so")
+    set_target_properties(${ENGINE_LIB} PROPERTIES SUFFIX ${DLL_EXT})
     target_compile_definitions(${ENGINE_LIB}
             PRIVATE NDEBUG
             PRIVATE _LINUX
@@ -67,11 +79,11 @@ else()
             PRIVATE NDEBUG
             PRIVATE _LINUX
             PRIVATE SFML_STATIC)
-    set(SFML_WINDOW_LIB ${SFML_LIBRARY_DIR}/libsfml-window.so.2.5)
-    set(SFML_SYSTEM_LIB ${SFML_LIBRARY_DIR}/libsfml-system.so.2.5)
-    set(SFML_GRAPHICS_LIB ${SFML_LIBRARY_DIR}/libsfml-graphics.so.2.5)
-    set(SFML_AUDIO_LIB ${SFML_LIBRARY_DIR}/libsfml-audio.so.2.5)
-    set(SFML_NETWORK_LIB ${SFML_LIBRARY_DIR}/libsfml-network.so.2.5)
+    set(SFML_WINDOW_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-window${SFML_EXT})
+    set(SFML_SYSTEM_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-system${SFML_EXT})
+    set(SFML_GRAPHICS_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-graphics${SFML_EXT})
+    set(SFML_AUDIO_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-audio${SFML_EXT})
+    set(SFML_NETWORK_LIB ${SFML_LIBRARY_DIR}/${LIB_PREFIX}sfml-network${SFML_EXT})
 endif()
 
 target_link_libraries(${GAME_EXEC}
