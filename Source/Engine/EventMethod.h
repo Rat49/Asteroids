@@ -1,11 +1,11 @@
 #pragma once
-#include <Exports.h>
-#include <EventIds.h>
+#include <Engine/Exports.h>
+#include <Engine/EventIds.h>
 
 class ENGINE_EXPORT EventMethod
 {
 public:
-	virtual void OnEvent(const std::pair<EventID, void*>& data) = 0;
+    virtual void OnEvent(const std::pair<EventID, void*>& data) = 0;
 
     bool IsEventsEnabled() const { return mEventsEnabled; }
 

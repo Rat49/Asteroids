@@ -1,6 +1,6 @@
 #pragma once
-#include <Exports.h>
-#include <UpdateMethod.h>
+#include <Engine/Exports.h>
+#include <Engine/UpdateMethod.h>
 
 namespace sf { class Window; }
 

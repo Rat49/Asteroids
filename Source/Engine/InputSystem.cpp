@@ -1,4 +1,4 @@
-#include <InputSystem.h>
+#include <Engine/InputSystem.h>
 #include <algorithm>
 
 bool InputSystem::KeyboardInput::operator<(const InputSystem::KeyboardInput& other) const
@@ -70,6 +70,18 @@ ActionState InputSystem::GetState(int32_t action) const
 ActionState InputSystem::operator[](int32_t action) const
 {
     return GetState(action);
+}
+
+bool InputSystem::IsPressed(int32_t action) const
+{
+    switch(GetState(action))
+    {
+    case ActionState::JustEntered:
+    case ActionState::InAction:
+        return true;
+    default:
+        return false;
+    }
 }
 
 void InputSystem::OnUpdate(float)

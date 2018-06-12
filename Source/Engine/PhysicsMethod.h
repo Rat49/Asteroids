@@ -1,6 +1,6 @@
 #pragma once
-#include <Exports.h>
-#include <Colliders.h>
+#include <Engine/Exports.h>
+#include <Engine/Colliders.h>
 
 class ENGINE_EXPORT PhysicsMethod
 {

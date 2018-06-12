@@ -1,6 +1,5 @@
-#include <LineShape.h>
+#include <Engine/LineShape.h>
 #include <cassert>
-#include "LineShape.h"
 
 namespace sf
 {

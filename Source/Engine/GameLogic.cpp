@@ -1,5 +1,5 @@
-#include <GameLogic.h>
-#include <Context.h>
+#include <Engine/GameLogic.h>
+#include <Engine/Context.h>
 #include <SFML/Window/Window.hpp>
 #include <SFML/Window/Event.hpp>
 

@@ -1,6 +1,6 @@
 #pragma once
-#include <Exports.h>
-#include <UpdateMethod.h>
+#include <Engine/Exports.h>
+#include <Engine/UpdateMethod.h>
 #include <vector>
 #include <cstdint>
 #include <SFML/Window/Keyboard.hpp>
@@ -24,6 +24,7 @@ public:
 
     ActionState GetState(int32_t action) const;
     ActionState operator[](int32_t action) const;
+    bool IsPressed(int32_t action) const;
 
     void OnUpdate(float deltaTime) override;
 

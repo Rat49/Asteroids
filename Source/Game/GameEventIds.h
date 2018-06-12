@@ -2,12 +2,12 @@
 
 enum class EventId : int
 {
-	Invalid = -1,
+    Invalid = -1,
     System,
-	Render,
-	Update,
+    Render,
+    Update,
 
     Close,
 
-	MaxEvent
+    MaxEvent
 };

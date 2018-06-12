@@ -1,24 +1,24 @@
 #pragma once
-#include <RenderSystem.h>
-#include <PhysicsSystem.h>
-#include <UpdateSystem.h>
-#include <EventSystem.h>
-#include <InputSystem.h>
-#include <GameLogic.h>
+#include <Engine/RenderSystem.h>
+#include <Engine/PhysicsSystem.h>
+#include <Engine/UpdateSystem.h>
+#include <Engine/EventSystem.h>
+#include <Engine/InputSystem.h>
+#include <Engine/GameLogic.h>
 #include <memory>
 
 class ENGINE_EXPORT Context final
 {
 public:
-	static Context& Instance()
-	{
-		static Context _instance;
+    static Context& Instance()
+    {
+        static Context _instance;
 
         if (!_instance.mInitialized)
             _instance.Setup();
 
-		return _instance;
-	}
+        return _instance;
+    }
 
     EventSystem* GetEvents()
     {
@@ -39,11 +39,11 @@ public:
     {
         return mLogic.get();
     }
-    
+
     RenderSystem* GetRender()
-	{
-		return mRender.get();
-	}
+    {
+        return mRender.get();
+    }
 
     PhysicsSystem* GetPhysics()
     {
@@ -52,8 +52,8 @@ public:
 
 private:
     Context()
-	{
-	}
+    {
+    }
 
     void Setup()
     {

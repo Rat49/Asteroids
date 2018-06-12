@@ -1,5 +1,4 @@
 .vs
-.idea
 cmake-build*
 Bin
 Temp

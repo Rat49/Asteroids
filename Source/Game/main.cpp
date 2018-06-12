@@ -1,10 +1,13 @@
-#include <Context.h>
-#include <InputGameAction.h>
+#include <Engine/Context.h>
+#include <Game/InputGameAction.h>
+#include <Game/Spaceship.h>
 
 int main()
 {
+    /// INIT SCREEN
     Context::Instance().GetUpdate()->FixFrequency(75);
 
+    /// INIT KEYBOARD
     Context::Instance().GetInput()->BindAction(GameAction::MoveUp, sf::Keyboard::W);
     Context::Instance().GetInput()->BindAction(GameAction::MoveUp, sf::Keyboard::Up);
     Context::Instance().GetInput()->BindAction(GameAction::MoveDown, sf::Keyboard::S);
@@ -16,6 +19,10 @@ int main()
     Context::Instance().GetInput()->BindAction(GameAction::Shoot, sf::Keyboard::Space);
     Context::Instance().GetInput()->BindAction(GameAction::Menu, sf::Keyboard::Escape);
 
+    /// GAME OBJECTS
+    auto main_character = std::make_unique<SpaceShip>();
+
+    /// MAIN CYCLE
     Context::Instance().GetUpdate()->Run();
     return 0;
 }

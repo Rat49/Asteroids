@@ -1,6 +1,6 @@
-#include <UpdateSystem.h>
-#include <EventIds.h>
-#include <Context.h>
+#include <Engine/UpdateSystem.h>
+#include <Engine/EventIds.h>
+#include <Engine/Context.h>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
@@ -56,24 +56,25 @@ void UpdateSystem::NotifyAll(float data)
 
 void UpdateSystem::OnEvent(const std::pair<uint32_t, void*>& data)
 {
+    sf::Event* systemEvent = nullptr;
     switch (data.first)
     {
     case EID::System:
+        systemEvent = reinterpret_cast<sf::Event*>(data.second);
+        switch (systemEvent->type)
         {
-            sf::Event* systemEvent = reinterpret_cast<sf::Event*>(data.second);
-            switch (systemEvent->type)
+        case sf::Event::Closed:
+            break;
+        case sf::Event::KeyPressed:
+            if (systemEvent->key.code == sf::Keyboard::Escape)
             {
-            case sf::Event::Closed:
-                break;
-            //case sf::Event::KeyPressed:
-            //    if (!systemEvent->key.alt || systemEvent->key.code != sf::Keyboard::F4)
-            //        return;
-            //    break;
-            default:
-                return;
+                mStopCycle = true;
             }
+            break;
+        default:
+            break;
         }
-    //__fallthrough
+        break;
     case EID::WinClose:
         mStopCycle = true;
         break;
