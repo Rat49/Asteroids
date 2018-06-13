@@ -3,7 +3,7 @@
 #include <Engine/UpdateMethod.h>
 #include <SFML/Graphics/CircleShape.hpp>
 
-class SpaceShip : public RenderMethod, public UpdateMethod
+class SpaceShip : public sfe::RenderMethod, public sfe::UpdateMethod
 {
 public:
     SpaceShip();

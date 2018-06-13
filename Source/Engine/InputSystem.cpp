@@ -1,6 +1,8 @@
 #include <Engine/InputSystem.h>
 #include <algorithm>
 
+using namespace sfe;
+
 bool InputSystem::KeyboardInput::operator<(const InputSystem::KeyboardInput& other) const
 {
     return static_cast<int>(Action) < static_cast<int>(other.Action);

@@ -1,14 +1,15 @@
 #pragma once
-#include <RenderMethod.h>
-#include <PhysicsMethod.h>
-#include <UpdateMethod.h>
+#include <Engine/RenderMethod.h>
+#include <Engine/PhysicsMethod.h>
+#include <Engine/UpdateMethod.h>
+#include <Engine/Vector.h>
 #include <SFML/Graphics/CircleShape.hpp>
 
 class Bullet : public sfe::UpdateMethod, public sfe::PhysicsMethod, public sfe::RenderMethod
 {
 public:
-	Bullet(sfe::Vector2f pos, sfe::Vector2f dir);
-	~Bullet();
+    Bullet(sfe::Vector2f pos, sfe::Vector2f dir);
+    ~Bullet();
 
     void OnUpdate(float deltaTime) override;
     void OnRender(sf::RenderTarget& data) override;

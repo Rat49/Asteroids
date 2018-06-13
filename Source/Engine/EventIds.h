@@ -1,17 +1,20 @@
 #pragma once
 #include <cstdint>
 
-using EventID = uint32_t;
-
-struct EID
+namespace sfe
 {
-    static constexpr EventID Invalid = 0xFFFFFFFF;
-    static constexpr EventID System = 0;
+    using EventID = uint32_t;
 
-    static constexpr EventID Render = 1;
-    static constexpr EventID Update = 2;
+    struct EID
+    {
+        static constexpr EventID Invalid = 0xFFFFFFFF;
+        static constexpr EventID System = 0;
 
-    static constexpr EventID WinClose = 10;
+        static constexpr EventID Render = 1;
+        static constexpr EventID Update = 2;
 
-    static constexpr uint32_t MaxEventsCount = 32;
-};
+        static constexpr EventID WinClose = 10;
+
+        static constexpr uint32_t MaxEventsCount = 32;
+    };
+}

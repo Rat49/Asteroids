@@ -4,17 +4,21 @@
 
 namespace sf { class Window; }
 
-class ENGINE_EXPORT GameLogic : UpdateMethod
+namespace sfe
 {
-public:
-    GameLogic();
-    ~GameLogic() override;
+    class ENGINE_EXPORT GameLogic : UpdateMethod
+    {
+    public:
+        GameLogic();
+        ~GameLogic() override;
 
-    void SetWindow(sf::Window* wnd) { mWindow = wnd; }
-    const sf::Window* GetWindow() const { return mWindow; }
+        void SetWindow(sf::Window* wnd) { mWindow = wnd; }
+        const sf::Window* GetWindow() const { return mWindow; }
 
-    void OnUpdate(float deltaTime) override;
+        void OnUpdate(float deltaTime) final override;
+        virtual void CustomUpdate(float deltaTime) {}
 
-private:
-    sf::Window* mWindow = nullptr;
-};
+    private:
+        sf::Window* mWindow = nullptr;
+    };
+}

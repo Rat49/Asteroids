@@ -1,19 +1,21 @@
 #pragma once
-#include <Context.h>
-#include <Ship.h>
-#include <Rock.h>
-#include <Bullet.h>
-#include <memory>
+#include <Engine/Context.h>
+#include <Engine/MemoryPool.h>
+#include <Game/Ship.h>
+#include <Game/Rock.h>
+#include <Game/Bullet.h>
 
 class AsteroidsLogic : public sfe::GameLogic
 {
 public:
-	void Setup();
-	void CustomUpdate(float deltaTime) override;
+    AsteroidsLogic();
+    ~AsteroidsLogic();
+
+    void Start();
+    void CustomUpdate(float deltaTime) override;
 
 private:
-	std::unique_ptr<Ship> mPlayer;
-	std::unique_ptr<Rock> mRock;
-	//rocks should be in pool
-	//bullets should be in pool
+    std::unique_ptr<Ship> mPlayer;
+    sfe::MemoryPool<Rock, 10> mRocks;
+    //sfe::MemoryPool<Bullet, 8> mBullets;
 };

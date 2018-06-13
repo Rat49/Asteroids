@@ -1,12 +1,21 @@
-#include <AsteroidsLogic.h>
+#include <Game/AsteroidsLogic.h>
 
-void AsteroidsLogic::Setup()
+AsteroidsLogic::AsteroidsLogic()
+    : GameLogic()
 {
-	mPlayer = std::make_unique<Ship>();
-	mRock = std::make_unique<Rock>();
+}
+
+AsteroidsLogic::~AsteroidsLogic()
+{
+}
+
+void AsteroidsLogic::Start()
+{
+    mPlayer = std::make_unique<Ship>();
+    auto r1 = mRocks.Get();
+    mRocks.Put(r1);
 }
 
 void AsteroidsLogic::CustomUpdate(float deltaTime)
 {
-	
 }

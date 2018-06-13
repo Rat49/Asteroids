@@ -1,6 +1,7 @@
 #include <Engine/RenderMethod.h>
 #include <Engine/Context.h>
 
+using namespace sfe;
 
 RenderMethod::RenderMethod()
 {

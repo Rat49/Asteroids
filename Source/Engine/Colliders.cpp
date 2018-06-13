@@ -3,6 +3,8 @@
 #include <cassert>
 #include <SFML/Graphics.hpp>
 
+using namespace sfe;
+
 namespace
 {
     bool __Intersects(const LineCollider* a, const LineCollider* b)
@@ -82,7 +84,7 @@ namespace
 
 //#pragma region -Line-collider-
 
-LineCollider::LineCollider(const sf::LineShape* owner) : mOwner(owner)
+LineCollider::LineCollider(const sf::Transformable& owner) : Collider(owner)
 {
     mType = ColliderType::Line;
 }
@@ -111,7 +113,7 @@ bool LineCollider::Intersects(const Collider* other) const
 //#pragma endregion
 //#pragma region -Rectangle-collider-
 
-RectangleCollider::RectangleCollider(const sf::RectangleShape* owner) : mOwner(owner)
+RectangleCollider::RectangleCollider(const sf::Transformable& owner) : Collider(owner)
 {
     mType = ColliderType::Rectangle;
 }
@@ -144,7 +146,7 @@ bool RectangleCollider::Intersects(const Collider* other) const
 //#pragma endregion
 //#pragma region -Circle-collider-
 
-CircleCollider::CircleCollider(const sf::CircleShape* owner) : mOwner(owner)
+CircleCollider::CircleCollider(const sf::Transformable& owner) : Collider(owner)
 {
     mType = ColliderType::Circle;
 }

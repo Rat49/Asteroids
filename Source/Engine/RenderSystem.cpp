@@ -1,7 +1,9 @@
 #include <Engine/RenderSystem.h>
 #include <Engine/Context.h>
-#include <memory>
 #include <SFML/Graphics.hpp>
+#include <memory>
+
+using namespace sfe;
 
 namespace
 {
@@ -9,6 +11,7 @@ namespace
 
     std::unique_ptr<sf::RenderWindow> s_renderWindow;
 }
+
 
 RenderSystem::RenderSystem()
 {

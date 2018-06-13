@@ -1,7 +1,7 @@
-#include "Bullet.h"
+#include <Game/Bullet.h>
 
 Bullet::Bullet(sfe::Vector2f pos, sfe::Vector2f dir)
-    : mCollider(&mShape)
+    : mCollider(mShape)
 {
     mShape.setRadius(5);
     mShape.setFillColor(sf::Color::Yellow);

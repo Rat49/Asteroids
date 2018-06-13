@@ -4,5 +4,4 @@
 namespace Const
 {
     constexpr char* Title = "Asteroids";
-
 }

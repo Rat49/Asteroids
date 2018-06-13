@@ -3,6 +3,8 @@
 #include <SFML/Window/Window.hpp>
 #include <SFML/Window/Event.hpp>
 
+using namespace sfe;
+
 GameLogic::GameLogic()
 {
 }
@@ -11,18 +13,13 @@ GameLogic::~GameLogic()
 {
 }
 
-void GameLogic::OnUpdate(float)
+void GameLogic::OnUpdate(float deltaTime)
 {
-    if (mWindow == nullptr)
-    {
-        return;
-    }
-
     sf::Event systemEvent;
-    if (!mWindow->pollEvent(systemEvent))
+    if (mWindow != nullptr && mWindow->pollEvent(systemEvent))
     {
-        return;
+        Context::Instance().GetEvents()->Notify(EID::System, &systemEvent);
     }
 
-    Context::Instance().GetEvents()->Notify(EID::System, &systemEvent);
+    CustomUpdate(deltaTime);
 }

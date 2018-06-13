@@ -3,7 +3,7 @@
 #include <cmath>
 #include <SFML/System/Vector2.hpp>
 
-namespace VectorMath
+namespace sfe::VectorMath
 {
     inline float ENGINE_EXPORT SqrLength(sf::Vector2f vec)
     {

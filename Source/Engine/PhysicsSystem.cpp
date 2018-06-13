@@ -1,5 +1,7 @@
 #include <Engine/PhysicsSystem.h>
 
+using namespace sfe;
+
 PhysicsSystem::PhysicsSystem()
 {
 }

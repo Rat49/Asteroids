@@ -1,6 +1,8 @@
 #include <Engine/EventSystem.h>
 #include <utility>
 
+using namespace sfe;
+
 void EventCaster::NotifyAll(const std::pair<EventID, void*>& data)
 {
     for (auto& receiver : mReceivers)

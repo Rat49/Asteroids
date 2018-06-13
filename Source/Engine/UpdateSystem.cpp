@@ -4,6 +4,8 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
+using namespace sfe;
+
 UpdateSystem::UpdateSystem()
 {
 }

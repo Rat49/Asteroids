@@ -3,84 +3,87 @@
 #include <vector>
 #include <algorithm>
 
-template<typename Method, typename Data>
-class Broadcaster
+namespace sfe
 {
-public:
-    Broadcaster() {}
-
-    virtual ~Broadcaster() {}
-
-    void AddReceiver(Method* receiver)
+    template<typename Method, typename Data>
+    class Broadcaster
     {
-        if (std::find(mReceivers.cbegin(), mReceivers.cend(), receiver) != mReceivers.cend())
+    public:
+        Broadcaster() {}
+
+        virtual ~Broadcaster() {}
+
+        void AddReceiver(Method* receiver)
         {
-            //already exists
-            return;
+            if (std::find(mReceivers.cbegin(), mReceivers.cend(), receiver) != mReceivers.cend())
+            {
+                //already exists
+                return;
+            }
+
+            mReceivers.push_back(receiver);
         }
 
-        mReceivers.push_back(receiver);
-    }
-
-    void RemoveReceiver(Method* receiver)
-    {
-        const auto it = std::find(mReceivers.cbegin(), mReceivers.cend(), receiver);
-        if (it == mReceivers.cend())
+        void RemoveReceiver(Method* receiver)
         {
-            //not exist
-            return;
+            const auto it = std::find(mReceivers.cbegin(), mReceivers.cend(), receiver);
+            if (it == mReceivers.cend())
+            {
+                //not exist
+                return;
+            }
+
+            mReceivers.erase(it);
+
         }
 
-        mReceivers.erase(it);
+        virtual void NotifyAll(Data data) = 0;
 
-    }
+    protected:
+        std::vector<Method*> mReceivers;
+    };
 
-    virtual void NotifyAll(Data data) = 0;
-
-protected:
-    std::vector<Method*> mReceivers;
-};
-
-template<typename Method, typename Data, typename Caster = Broadcaster<Method, Data>>
-class MultiBroadcaster
-{
-public:
-    MultiBroadcaster(uint32_t maxEventsCount) : mReceivers(maxEventsCount) {}
-    virtual ~MultiBroadcaster() {}
-
-    void AddReceiver(EventID id, Method* receiver)
+    template<typename Method, typename Data, typename Caster = Broadcaster<Method, Data>>
+    class MultiBroadcaster
     {
-        if (id == EID::Invalid)
+    public:
+        MultiBroadcaster(uint32_t maxEventsCount) : mReceivers(maxEventsCount) {}
+        virtual ~MultiBroadcaster() {}
+
+        void AddReceiver(EventID id, Method* receiver)
         {
-            //invalid event id
-            return;
+            if (id == EID::Invalid)
+            {
+                //invalid event id
+                return;
+            }
+
+            mReceivers[id].AddReceiver(receiver);
         }
 
-        mReceivers[id].AddReceiver(receiver);
-    }
-
-    void RemoveReceiver(EventID id, Method* receiver)
-    {
-        if (id == EID::Invalid)
+        void RemoveReceiver(EventID id, Method* receiver)
         {
-            //invalid event id
-            return;
+            if (id == EID::Invalid)
+            {
+                //invalid event id
+                return;
+            }
+
+            mReceivers[id].RemoveReceiver(receiver);
         }
 
-        mReceivers[id].RemoveReceiver(receiver);
-    }
-
-    void NotifyAll(EventID id, Data data)
-    {
-        if (id == EID::Invalid)
+        void NotifyAll(EventID id, Data data)
         {
-            //invalid event id
-            return;
+            if (id == EID::Invalid)
+            {
+                //invalid event id
+                return;
+            }
+
+            mReceivers[id].NotifyAll(data);
         }
 
-        mReceivers[id].NotifyAll(data);
-    }
-
-protected:
-    std::vector< Caster > mReceivers;
-};
+    protected:
+        std::vector< Caster > mReceivers;
+    };
+}
