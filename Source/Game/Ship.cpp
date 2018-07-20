@@ -1,24 +1,10 @@
 #include <Game/Ship.h>
-#include <Game/InputGameAction.h>
 #include <Engine/Context.h>
 #include <SFML/Window/Window.hpp>
 #include <cassert>
 
 namespace
 {
-    float GetActionNum(int32_t action)
-    {
-        return sfe::Context::Instance().GetInput()->IsPressed(action) ? 1.f : 0.f;
-    }
-
-    sfe::Vector2<float> GetMovement()
-    {
-        sfe::Vector2<float> result(
-            GetActionNum(GameAction::MoveRight) - GetActionNum(GameAction::MoveLeft),
-            GetActionNum(GameAction::MoveDown) - GetActionNum(GameAction::MoveUp));
-        return result;
-    }
-
     float MaxSpeed = 500;
     float AccumSpeed = 50;
     float BreakSpeed = 10;
@@ -45,10 +31,28 @@ Ship::~Ship()
 {
 }
 
+void Ship::SetDirection(sfe::Vector2f dir)
+{
+    mCurrentMovement = dir;
+}
+
+sfe::Vector2f Ship::GetPosition() const
+{
+    auto pos = sfe::Vector2f(mShape.getPosition());
+    auto offset = sf::Vector2f(mShape.getLocalBounds().width, mShape.getLocalBounds().height);
+    auto o = sfe::Vector2f(offset * 0.5f * mShape.getScale();
+    pos += offset;
+    return pos;
+}
+
+sfe::Vector2f Ship::GetDirection() const
+{
+    return mPrevMovement;
+}
+
 void Ship::OnUpdate(float deltaTime)
 {
-    const sfe::Vector2f offset = GetMovement();
-    if (offset == sfe::Vector2f::Zero())
+    if (mCurrentMovement == sfe::Vector2f::Zero())
     {
         mSpeed -= BreakSpeed;
         if (mSpeed <= 0.f)
@@ -60,7 +64,8 @@ void Ship::OnUpdate(float deltaTime)
     else
     {
         mSpeed = std::min(MaxSpeed, mSpeed + AccumSpeed);
-        mPrevMovement = offset;
+        mPrevMovement = mCurrentMovement;
+        mCurrentMovement = sfe::Vector2f::Zero();
     }
 
     mShape.move(mPrevMovement * deltaTime * mSpeed);

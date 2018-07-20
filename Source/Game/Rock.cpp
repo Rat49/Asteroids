@@ -33,7 +33,7 @@ Rock::~Rock()
 
 void Rock::OnUpdate(float deltaTime)
 {
-    mShape.move(mDirection * deltaTime * 1000);
+    mShape.move(mDirection * deltaTime * 100);
     if (ScreenSpace.intersects(mShape.getGlobalBounds()))
     {
         return;

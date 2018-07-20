@@ -17,5 +17,5 @@ public:
 private:
     std::unique_ptr<Ship> mPlayer;
     sfe::MemoryPool<Rock, 10> mRocks;
-    //sfe::MemoryPool<Bullet, 8> mBullets;
+    sfe::MemoryPool<Bullet, 8> mBullets;
 };

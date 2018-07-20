@@ -16,7 +16,7 @@ namespace
 RenderSystem::RenderSystem()
 {
 #ifdef _DEBUG
-    s_renderWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode(1280, 720), Title, sf::Style::Default);
+    s_renderWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode(640, 480), Title, sf::Style::Default);
 #else
     s_renderWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode::getDesktopMode(), Title, sf::Style::Default);
 #endif

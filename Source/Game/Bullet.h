@@ -8,8 +8,11 @@
 class Bullet : public sfe::UpdateMethod, public sfe::PhysicsMethod, public sfe::RenderMethod
 {
 public:
-    Bullet(sfe::Vector2f pos, sfe::Vector2f dir);
+    Bullet();
     ~Bullet();
+
+    void Start(sfe::Vector2f pos, sfe::Vector2f dir, float mDistance);
+    bool IsFlying() const;
 
     void OnUpdate(float deltaTime) override;
     void OnRender(sf::RenderTarget& data) override;
@@ -21,5 +24,6 @@ private:
     sfe::CircleCollider mCollider;
     sfe::Vector2f mDirection;
     sfe::Vector2f mPosition;
+    float mMaxSqrDistance;
 };
 
