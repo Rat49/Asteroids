@@ -12,8 +12,8 @@ namespace
     sfe::Vector2f GetMovementVec()
     {
         return sfe::Vector2f(
-            GetActionValue(GameAction::MoveRight) - GetActionValue(GameAction::MoveLeft),
-            GetActionValue(GameAction::MoveDown) - GetActionValue(GameAction::MoveUp));
+            static_cast<float>(GetActionValue(GameAction::MoveRight) - GetActionValue(GameAction::MoveLeft)),
+			static_cast<float>(GetActionValue(GameAction::MoveDown) - GetActionValue(GameAction::MoveUp)));
     }
 }
 
@@ -33,7 +33,7 @@ void AsteroidsLogic::Start()
     mRocks.Put(r1);
 }
 
-void AsteroidsLogic::CustomUpdate(float deltaTime)
+void AsteroidsLogic::CustomUpdate(float)
 {
     mPlayer->SetDirection(GetMovementVec());
     if (sfe::Context::Instance().GetInput()->GetState(GameAction::Shoot) == sfe::ActionState::JustEntered)

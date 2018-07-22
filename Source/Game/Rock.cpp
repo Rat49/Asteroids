@@ -49,10 +49,10 @@ void Rock::OnRender(sf::RenderTarget& data)
     data.draw(mShape);
 }
 
-void Rock::OnCollisionEnter(const sfe::Collider& other)
+void Rock::OnCollisionEnter(const sfe::Collider&)
 {
 }
 
-void Rock::OnCollisionExit(const sfe::Collider& other)
+void Rock::OnCollisionExit(const sfe::Collider&)
 {
 }

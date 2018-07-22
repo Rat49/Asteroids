@@ -1,36 +1,46 @@
-workspace "Asteroids"
+local sdk_version = os.getWindowsRegistry( "HKLM:SOFTWARE\\Wow6432Node\\Microsoft\\Microsoft SDKs\\Windows\\v10.0\\ProductVersion" ) .. ".0"
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------	
+workspace ("Asteroids")
 	configurations { "Debug", "Release" }
 	platforms { "x64" }
 	location ( "../Generated/Projects" )
 	targetdir ( "../Generated/Bin" )
 	objdir ( "../Generated/Obj/%{prj.name}" )
 	
-	flags "FatalWarnings"
-		warnings "Extra"
+	flags ("FatalWarnings")
+		warnings ("Extra")
         
-	filter "configurations:Debug"
+	filter ("configurations:Debug")
 		defines { "_DEBUG" }
-		symbols "On"
-		optimize "Off"
-		targetsuffix "_d"
+		symbols ("On")
+		optimize ("Off")
+		targetsuffix ("_d")
 	
-	filter "configurations:Release"
+	filter ("configurations:Release")
 		defines { "NDEBUG" }
-		symbols "Off"
-		optimize "On"
+		symbols ("Off")
+		optimize ("On")
 		
-	filter "platforms:x64"
-		architecture "x64"
-		system "Windows"
+	filter ("platforms:x64")
+		architecture ("x64")
+		system ("Windows")
 	
 	filter {}
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-	project "Asteroids"
-		kind "WindowedApp"
-		language "C++"
-		characterset "MBCS"
-		defines { "SFML_STATIC" }
+	project ("Asteroids")
+		kind ("WindowedApp")
+		systemversion (sdk_version)
+		language ("C++")
+		characterset ("MBCS")
+		
+		defines
+		{
+			"SFML_STATIC",
+			"ENGINE_STATIC",
+			"_WINDOWS"
+		}
 		
 		local SourceDir = "../Source";
 
@@ -56,12 +66,14 @@ workspace "Asteroids"
 		
 		postbuildcommands
 		{
-			"{COPY} '$(SFML_ROOT)/bin/openal32.dll' '%{cfg.targetdir}'"
+			'{COPY} "$(SFML_ROOT)/bin/openal32.dll" "%{cfg.targetdir}/*.*"',
+			'{COPY} "%{wks.location}../' .. SourceDir .. '/Images" "%{cfg.targetdir}/Resources/*.*"',
 		}
 		
 		includedirs
 		{
-			"$(SFML_ROOT)/include"
+			"$(SFML_ROOT)/include",
+			SourceDir,
 		}
 		
 		libdirs
@@ -74,7 +86,6 @@ workspace "Asteroids"
 		{
 			"opengl32.lib",
 			"freetype.lib",
-			"jpeg.lib",
 			"ws2_32.lib",
 			"winmm.lib",
 			"openal32.lib",

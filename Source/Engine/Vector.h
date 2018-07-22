@@ -130,6 +130,7 @@ namespace sfe
         Vector2<T>& Normalize()
         {
             *this *= (1 / Length());
+			return *this;
         }
 
         Vector2<T> GetNormalized()
@@ -147,6 +148,97 @@ namespace sfe
         T x;
         T y;
     };
+
+	template <typename T>
+	Vector2<T> operator -(const Vector2<T>& right)
+	{
+		return Vector2<T>(-right.x, -right.y);
+	}
+
+	template <typename T>
+	Vector2<T>& operator +=(Vector2<T>& left, const Vector2<T>& right)
+	{
+		left.x += right.x;
+		left.y += right.y;
+		return left;
+	}
+
+	template <typename T>
+	Vector2<T>& operator -=(Vector2<T>& left, const Vector2<T>& right)
+	{
+		left.x -= right.x;
+		left.y -= right.y;
+		return left;
+	}
+
+	template <typename T>
+	Vector2<T> operator +(const Vector2<T>& left, const Vector2<T>& right)
+	{
+		Vector2<T> result(left);
+		result += right;
+		return result;
+	}
+
+	template <typename T>
+	Vector2<T> operator -(const Vector2<T>& left, const Vector2<T>& right)
+	{
+		Vector2<T> result(left);
+		result -= right;
+		return result;
+	}
+
+	template <typename T>
+	Vector2<T>& operator *=(Vector2<T>& left, T right)
+	{
+		left.x *= right;
+		left.y *= right;
+		return left;
+	}
+
+	template <typename T>
+	Vector2<T> operator *(const Vector2<T>& left, T right)
+	{
+		Vector2<T> result(left);
+		result *= right;
+		return result;
+	}
+
+	template <typename T>
+	Vector2<T> operator *(T left, const Vector2<T>& right)
+	{
+		Vector2<T> result(right);
+		result *= left;
+		return result;
+	}
+
+	template <typename T>
+	Vector2<T> operator /(const Vector2<T>& left, T right)
+	{
+		Vector2<T> result(left);
+		result /= right;
+		return result;
+	}
+
+	template <typename T>
+	Vector2<T>& operator /=(Vector2<T>& left, T right)
+	{
+		left.x /= right;
+		left.y /= right;
+		return left;
+	}
+
+	template <typename T>
+	bool operator ==(const Vector2<T>& left, const Vector2<T>& right)
+	{
+		return std::abs(left.x - right.x) < 0.001
+			&& std::abs(left.y - right.y) < 0.001;
+	}
+
+	template <typename T>
+	bool operator !=(const Vector2<T>& left, const Vector2<T>& right)
+	{
+		return !(left == right);
+	}
 
     using Vector2f = Vector2<float>;
     using Vector2u = Vector2<unsigned int>;

@@ -16,7 +16,7 @@ namespace sfe
         const sf::Window* GetWindow() const { return mWindow; }
 
         void OnUpdate(float deltaTime) final override;
-        virtual void CustomUpdate(float deltaTime) {}
+        virtual void CustomUpdate(float) {}
 
     private:
         sf::Window* mWindow = nullptr;

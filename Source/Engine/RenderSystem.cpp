@@ -29,7 +29,7 @@ RenderSystem::~RenderSystem()
     s_renderWindow.reset(nullptr);
 }
 
-void RenderSystem::OnUpdate(float deltaTime)
+void RenderSystem::OnUpdate(float)
 {
     s_renderWindow->clear();
     NotifyAll(*s_renderWindow);

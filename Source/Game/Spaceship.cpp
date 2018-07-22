@@ -25,7 +25,7 @@ void SpaceShip::OnRender(sf::RenderTarget& data)
 
 void SpaceShip::OnUpdate(float deltaTime)
 {
-    InputSystem* input = Context::Instance().GetInput();
+    sfe::InputSystem* input = sfe::Context::Instance().GetInput();
     sf::Vector2f movement;
     bool shooting = input->IsPressed(GameAction::Shoot);
 

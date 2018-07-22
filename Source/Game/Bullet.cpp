@@ -51,10 +51,10 @@ void Bullet::OnRender(sf::RenderTarget& data)
     data.draw(mShape);
 }
 
-void Bullet::OnCollisionEnter(const sfe::Collider& other)
+void Bullet::OnCollisionEnter(const sfe::Collider&)
 {
 }
 
-void Bullet::OnCollisionExit(const sfe::Collider& other)
+void Bullet::OnCollisionExit(const sfe::Collider&)
 {
 }

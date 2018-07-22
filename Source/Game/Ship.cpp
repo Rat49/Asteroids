@@ -39,8 +39,8 @@ void Ship::SetDirection(sfe::Vector2f dir)
 sfe::Vector2f Ship::GetPosition() const
 {
     auto pos = sfe::Vector2f(mShape.getPosition());
-    auto offset = sf::Vector2f(mShape.getLocalBounds().width, mShape.getLocalBounds().height);
-    auto o = sfe::Vector2f(offset * 0.5f * mShape.getScale();
+    auto offset = sfe::Vector2f(mShape.getLocalBounds().width, mShape.getLocalBounds().height);
+    //auto o = offset * 0.5f * sfe::Vector2f(mShape.getScale());
     pos += offset;
     return pos;
 }
@@ -76,11 +76,11 @@ void Ship::OnRender(sf::RenderTarget& data)
     data.draw(mShape);
 }
 
-void Ship::OnCollisionEnter(const sfe::Collider& other)
+void Ship::OnCollisionEnter(const sfe::Collider&)
 {
 }
 
-void Ship::OnCollisionExit(const sfe::Collider& other)
+void Ship::OnCollisionExit(const sfe::Collider&)
 {
 }
 

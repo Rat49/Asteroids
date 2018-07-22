@@ -4,9 +4,9 @@
 
 #ifdef _WINDOWS
 #include <Windows.h>
-int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
+int CALLBACK WinMain(_In_ HINSTANCE, _In_ HINSTANCE, _In_ LPSTR, _In_ int)
 #else
-int main(int argc, char** argv)
+int main(int, char**)
 #endif
 {
     /// INIT SCREEN

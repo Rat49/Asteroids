@@ -9,7 +9,7 @@ namespace sf
     {
     }
 
-    void LineShape::setDirection(const Vector2f& direction)
+    void LineShape::setDirection(const Vector2f&)
     {
     }
 
